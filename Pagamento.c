@@ -36,16 +36,16 @@ static float tratarDinheiro()
     float desconto = 0;
     float valorComDesconto = 0;
 
-    if(gastosTotais > 0 && gastosTotais <= 50) {
+    if (gastosTotais <= 50) {
         porcentagem = 0.05;
-
     }
-    else if(gastosTotais > 50 && gastosTotais <= 99) {
+    else if (gastosTotais > 50 && gastosTotais < 200) {
         porcentagem = 0.10;
-
     }
     else {
-        porcentagem = 0.18;
+        printf("Informe o percentual de desconto (em porcentagem): ");
+        scanf("%f", &porcentagem);
+        porcentagem /= 100; // Convertendo para decimal
     }
 
     desconto = (porcentagem * gastosTotais);

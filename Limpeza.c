@@ -1,13 +1,18 @@
-static int codigosLimpeza[5] = {11, 12, 13, 14};
-static char nomeProdutoLimpeza[5][50] =
+static int codigosLimpeza[9] = {11, 12, 13, 14, 15, 16, 17, 18, 19};
+static char nomeProdutoLimpeza[9][50] =
 {
-        {"Detergente"},
-        {"Sabao em Po (1kg)"},
-        {" Esponja"},
-        {"Amaciante (1Lt)"}
+    {"Detergente"},
+    {"Sabao em Po (1kg)"},
+    {"Esponja"},
+    {"Amaciante (1Lt)"},
+    {"Alvejante (1Lt)"},
+    {"Desinfetante"},
+    {"Lustra Moveis"},
+    {"Limpa Vidros"},
+    {"Sabao Liquido"}
 };
-static float precoLimpeza[5] = {9.5, 12.5, 1.9, 8.50};
-static int repeticaoLimpeza = 4;
+static float precoLimpeza[9] = {9.5, 12.5, 1.9, 8.50, 10.0, 7.0, 5.0, 6.5, 11.0};
+static int repeticaoLimpeza = 9;
 
 //Funcao que recebe o codigo, reenvia para a funcao de pegar a quantidade, e retorna o preco correspodente
 static float retornoPrecoLimpeza(int codigoCompra)
@@ -30,6 +35,26 @@ static float retornoPrecoLimpeza(int codigoCompra)
             break;
         case 14:
             preco = precoLimpeza[3];
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            break;
+        case 15:
+            preco = precoLimpeza[4];
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            break;
+         case 16:
+            preco = precoLimpeza[5];
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            break;
+         case 17:
+            preco = precoLimpeza[6];
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            break;
+         case 18:
+            preco = precoLimpeza[7];
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            break;
+         case 19:
+            preco = precoLimpeza[8];
             quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
             break;
         default:

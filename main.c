@@ -13,22 +13,22 @@
 static float faturamento[4] = {0,0,0,0};
 static float gastos[4] = {0,0,0,0};
 static int vendas = 0;
-static float saldo_cliente = 0;
+static float saldo_caixa = 0;
 
 int main(void)
 {   
-    verifica_saldo_cliente();
+    verifica_saldo_caixa();
     mostrarAPagar();
     menuPrincipal();
     redirecionarUsuario();
     return 0;
 }
 
-void verifica_saldo_cliente(){
-    printf("Informe seu saldo para compras:\n");
-    scanf("%d", &saldo_cliente);
+void verifica_saldo_caixa(){
+    printf("Informe o saldo inicial do caixa:\n");
+    scanf("%d", &saldo_caixa);
 
-    return saldo_cliente > 0 ? saldo_cliente : verifica_saldo_cliente();
+    return saldo_caixa >= 0 ? saldo_caixa : verifica_saldo_caixa();
 }
 
 // redireciona o usuario a funcao correspondente a sua escolha
