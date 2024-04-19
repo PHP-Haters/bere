@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "Menu.c"
 #include "CarrinhoDeCompras.c"
@@ -13,10 +14,10 @@
 static float faturamento[4] = {0,0,0,0};
 static float gastos[4] = {0,0,0,0};
 static int vendas = 0;
+static bool  saldoEstaSetado = false;
 static float saldo_caixa = 0;
 
-int main(void)
-{   
+int main(void){
     verifica_saldo_caixa();
     mostrarAPagar();
     menuPrincipal();
@@ -25,8 +26,14 @@ int main(void)
 }
 
 void verifica_saldo_caixa(){
+    if(saldoEstaSetado){
+        return;
+    }
+
     printf("Informe o saldo inicial do caixa:\n");
     scanf("%d", &saldo_caixa);
+
+    saldoEstaSetado = true;
 
     return saldo_caixa >= 0 ? saldo_caixa : verifica_saldo_caixa();
 }
@@ -157,7 +164,7 @@ void chamarPagamento()
 // termina o faturamento, mostrando as vendas do dia.
 void terminarFaturamento()
 {
-    system("cls");
+    system("clear");
     printf("--/--/--/--/--/--/");
     printf("\n");
     printf("Faturamento de limpeza: %.2f", faturamento[1]);
@@ -177,7 +184,7 @@ void terminarFaturamento()
 // mostra os valores que tem que pagar
 void mostrarAPagar()
 {
-    system("cls");
+    system("clear");
     printf("--/--/--/--/--/--/");
     printf("\n");
     printf("Valor da Limpeza a pagar: %.2f", gastos[1]);

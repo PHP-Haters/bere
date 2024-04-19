@@ -5,13 +5,13 @@ static char nomeProdutoLimpeza[9][50] =
     {"Sabao em Po (1kg)"},
     {"Esponja"},
     {"Amaciante (1Lt)"},
-    {"Alvejante (1Lt)"},
-    {"Desinfetante"},
-    {"Lustra Moveis"},
+    {"Bucha de Pia (kit c/3)"},
+    {"Desinfetante (1Lt)"},
+    {"Sabão em Barra(Un)"},
     {"Limpa Vidros"},
     {"Sabao Liquido"}
 };
-static float precoLimpeza[9] = {9.5, 12.5, 1.9, 8.50, 10.0, 7.0, 5.0, 6.5, 11.0};
+static float precoLimpeza[9] = {1.99, 8.99, 1.5, 15.0, 4.99, 7.99, 1.0, 6.5, 11.0};
 static int repeticaoLimpeza = 9;
 
 //Funcao que recebe o codigo, reenvia para a funcao de pegar a quantidade, e retorna o preco correspodente
@@ -39,23 +39,23 @@ static float retornoPrecoLimpeza(int codigoCompra)
             break;
         case 15:
             preco = precoLimpeza[4];
-            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[4], precoLimpeza[4], codigosLimpeza[4]);
             break;
          case 16:
             preco = precoLimpeza[5];
-            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[5], precoLimpeza[5], codigosLimpeza[5]);
             break;
          case 17:
             preco = precoLimpeza[6];
-            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[6], precoLimpeza[6], codigosLimpeza[6]);
             break;
          case 18:
             preco = precoLimpeza[7];
-            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[7], precoLimpeza[7], codigosLimpeza[7]);
             break;
          case 19:
             preco = precoLimpeza[8];
-            quantidade = pegarQuantidade(nomeProdutoLimpeza[3], precoLimpeza[3], codigosLimpeza[3]);
+            quantidade = pegarQuantidade(nomeProdutoLimpeza[8], precoLimpeza[8], codigosLimpeza[8]);
             break;
         default:
             preco = 0.0;
