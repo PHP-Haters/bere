@@ -3,7 +3,7 @@ static float gastosTotais;
 // Mostra o valor a ser pago em cartao
 static void tratarCartao()
 {
-    system("clear");
+    system("cls");
     printf("Valor total: %.2f \n", gastosTotais);
 }
 // Verifica se o cartao conseguiu ser usado na maquina de cartao
@@ -30,7 +30,7 @@ static int maquinaDeCartao()
 // Cria o desconto correspodente, e mostra o valor a ser pago em dinheiro
 static float tratarDinheiro()
 {
-    system("clear");
+    system("cls");
 
     float porcentagem = 0.0;
     float desconto = 0;

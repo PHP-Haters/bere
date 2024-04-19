@@ -164,7 +164,7 @@ void chamarPagamento()
 // termina o faturamento, mostrando as vendas do dia.
 void terminarFaturamento()
 {
-    system("clear");
+    system("cls");
     printf("--/--/--/--/--/--/");
     printf("\n");
     printf("Faturamento de limpeza: %.2f", faturamento[1]);
@@ -184,7 +184,7 @@ void terminarFaturamento()
 // mostra os valores que tem que pagar
 void mostrarAPagar()
 {
-    system("clear");
+    system("cls");
     printf("--/--/--/--/--/--/");
     printf("\n");
     printf("Valor da Limpeza a pagar: %.2f", gastos[1]);

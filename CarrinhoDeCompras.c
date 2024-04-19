@@ -28,7 +28,7 @@ static void addItemCarrinho(char nomeItem[50], float precoItem, int quantidadeIt
 }
 
 static void listarItensCarriho(){
-    system("clear");
+    system("cls");
     printf("Carrinho de compras atual: \n\n");
     printf("Nome do Produto | Preco do Produto | Quantidade do Produto \n");
 
