@@ -42,7 +42,16 @@ void verifica_saldo_caixa(){
 void redirecionarUsuario()
 {
     int entrada = 0;
-    scanf("%d", &entrada);
+
+    while (true){
+        if (scanf("%d", &entrada) != 1 || entrada <= 0 || entrada > 6) {
+            while (getchar() != '\n');
+            printf("Valor invalido, por favor digite um dos numeros em nosso menu:\n");
+            sleep(3);
+        } else {
+            break;
+        }
+    }
 
     switch(entrada)
     {
@@ -184,8 +193,8 @@ void terminarFaturamento()
     printf("\n");
     printf("--/--/--/--/--/--/");
     printf("\n \n \n");
-
 }
+
 // mostra os valores que tem que pagar
 void mostrarAPagar()
 {
