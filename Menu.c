@@ -10,7 +10,9 @@ static void menuPrincipal()
     printf("\n");
     printf("4. Pagamento");
     printf("\n");
-    printf("5. Terminar faturacao do dia");
+    printf("5. Abertura de caixa");
+    printf("\n");
+    printf("6. Fechamento de caixa");
     printf("\n");
     printf("-- FIM MENU PRINCIPAL --");
     printf("\n");

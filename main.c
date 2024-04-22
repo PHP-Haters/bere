@@ -30,7 +30,7 @@ void verifica_saldo_caixa(){
         return;
     }
 
-    printf("Informe o saldo inicial do caixa:\n");
+    printf("Informe o saldo do caixa:\n");
     scanf("%d", &saldo_caixa);
 
     saldoEstaSetado = true;
@@ -63,7 +63,12 @@ void redirecionarUsuario()
             chamarPagamento();
             break;
         case 5:
-            //chama pagamento
+            //chama abrir caixa
+            saldoEstaSetado = false;
+            main();
+            break;
+        case 6:
+            //chama mostrar faturamento diario
             terminarFaturamento();
             break;
         default:
