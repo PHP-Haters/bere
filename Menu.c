@@ -2,9 +2,9 @@ static void menuPrincipal()
 {
     printf("-- MENU PRINCIPAL --");
     printf("\n");
-    printf("1. material de Limpeza");
+    printf("1. Materiais de Limpeza");
     printf("\n");
-    printf("2. Venda de Alimentos");
+    printf("2. Alimentos");
     printf("\n");
     printf("3. Padaria");
     printf("\n");

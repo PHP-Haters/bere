@@ -42,7 +42,7 @@ static void listarItensCarriho(){
 static int pegarQuantidade(char nome[50], float preco,int codigo)
 {
     int quantidade = 0;
-    printf("\nQuantas unidades desse produto você deseja: ");
+    printf("\nQuantas unidades desse produto voce deseja: ");
     scanf("%d", &quantidade);
 
     addItemCarrinho(nome, preco, quantidade, codigo);
