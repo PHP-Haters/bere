@@ -35,28 +35,36 @@ static float tratarDinheiro()
     float porcentagem = 0.0;
     float desconto = 0;
     float valorComDesconto = 0;
+    float valorRecebido = 0;
+    float troco = 0;
 
-    if (gastosTotais <= 50) {
-        porcentagem = 0.05;
-    }
-    else if (gastosTotais > 50 && gastosTotais < 200) {
-        porcentagem = 0.10;
-    }
-    else {
-        printf("Informe o percentual de desconto (em porcentagem): ");
-        scanf("%f", &porcentagem);
-        porcentagem /= 100; // Convertendo para decimal
-    }
+    printf("Informe o valor total da compra: ");
+    scanf("%f", &gastosTotais);
+
+    printf("Informe o percentual de desconto (em porcentagem): ");
+    scanf("%f", &porcentagem);
+    porcentagem /= 100; // Convertendo para decimal
 
     desconto = (porcentagem * gastosTotais);
     valorComDesconto = (gastosTotais - desconto);
 
-    printf("Valor total: %.2f \n", gastosTotais);
+    printf("Valor total da compra: %.2f \n", gastosTotais);
     printf("Valor descontado: %.2f \n", desconto);
     printf("Valor final com desconto: %.2f \n", valorComDesconto);
 
+    printf("\nInforme o valor recebido pelo cliente: ");
+    scanf("%f", &valorRecebido);
+
+    if (valorRecebido < valorComDesconto) {
+        printf("Pagamento recusado! Valor recebido menor que o valor da compra.\n");
+        return 0; // Retorna 0 indicando pagamento recusado
+    }
+
+    troco = valorRecebido - valorComDesconto;
+    printf("Troco: %.2f \n", troco);
+
     return valorComDesconto;
-}
+     }
 
 // Pede o tipo de pagamento
 static int tipoPagamento(float gastos)
