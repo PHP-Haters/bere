@@ -1,5 +1,8 @@
 #include "mainHeader.h"
 
+// GLOBAL VARIABLES
+float balance;
+
 void main(){
     setlocale(LC_ALL,"");
     defineMemoryForProducts();
@@ -25,7 +28,7 @@ void redirectUser(){
         //adicionar vendas
         break;
     case 3:
-        //adicionar abertura de caixa
+        mainCashier();
         break;
     case 4:
         //adicionar fechamento de caixas
@@ -48,6 +51,7 @@ void mainRegister() {
     registerMenu();
     redirectRegister();
 }
+
 void redirectRegister(){
     int choiceRegister = 0;
 
@@ -133,11 +137,51 @@ void eliminateProduct() {
 // SECCAO
 // ABERTURA DE CAIXA
 
+void mainCashier(){
+    cashierMenu();
+    redirectCashier();
+}
+
+void redirectCashier(){
+    int choice = 0;
+
+    scanf("%d", &choice);
+
+    switch (choice){
+    case 1:
+        openCashier();
+        break;
+    case 2:
+        initializeShop();
+        break;
+    default:
+        printf("Digite uma opção válida!");
+        sleep(2);
+        mainCashier();
+        break;
+    }
+}
+
+void openCashier(){
+    system("cls");
+    printf("Digite um saldo para o caixa: ");
+    scanf("%d", &balance);
+
+    system("cls");
+    printf("Caixa setado com sucesso!");
+    sleep(3);
+
+    system("cls");
+
+    initializeShop();
+}
+
 // SECCAO
 // FECHAMENTO DE CAIXA
 
 //SECCAO
 //RELATORIOS
+
 void mainRecords() {
     recordsMenu();
     redirectRecords();
