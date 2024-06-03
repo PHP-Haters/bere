@@ -48,7 +48,6 @@ void cadastro() {
 }
 
 void redirectCadastro(){
-
     int choiceCadastro = 0;
 
     switch(choiceCadastro){
