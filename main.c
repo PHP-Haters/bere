@@ -119,7 +119,7 @@ void addNewClient() {
 }
 void eliminateClient() {
     comesFromRecords = 0;
-    callClientRecords();
+    //callClientRecords();
     eliminateChosenClient();
     sleep(2);
     initializeShop();

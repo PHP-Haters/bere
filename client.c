@@ -60,13 +60,13 @@ static int addClient(CLIENT * newClient) {
 }
 
 //funcao para deixa o input stream limpo
-void clear() {
+static void clearInputStream() {
     while ( getchar() != '\n' );
 }
 // pergunta e gfuarda a informacao de um novo produto
 static int askNewClient() {
     CLIENT newClient;
-    clear();
+    clearInputStream();
 
     printf("descri��o: ");
     fgets(newClient.description, 100, stdin);
@@ -75,18 +75,18 @@ static int askNewClient() {
     printf("Pre�o: ");
     scanf("%f", &newClient.price);
     printf("\n");
-    clear();
+    clearInputStream();
 
     while(newClient.category != 'L' && newClient.category != 'P' && newClient.category != 'A' ) {
         printf("Categoria (L - limpeza, P - Padaria, A - alimentos): ");
         scanf("%c", &newClient.category);
-        clear();
+        clearInputStream();
     }
     printf("\n");
 
     printf("Margem de lucro: ");
     scanf("%f", &newClient.profitMargin);
-    clear();
+    clearInputStream();
     printf("\n");
 
     printf("Estoque atual: ");
