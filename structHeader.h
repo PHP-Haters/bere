@@ -24,4 +24,15 @@ typedef struct client{
     
 } CLIENT;
 
+typedef struct sale{
+    int code;
+    char description[40];
+    char category[15];
+    float rawPrice;
+    float gain;
+    float finalPrice;
+    int quantityOnStock;
+    int minimumStock;
+} SALE;
+
 #endif /* STRUCTHEADER_H */
