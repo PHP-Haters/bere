@@ -64,16 +64,28 @@ void cashierMenu(){
 
 // SECCAO
 // RELATORIOS
-
 static void recordsMenu() {
     cleanChat();
-
-    printf(".__________- CADASTROS -___________.\n");
+    printf(".__________- RELATÃ“RIOS -__________.\n");
     printf("|                                  |\n");
-    printf("| 5.1 > Relatório de Clientes      |\n");
-    printf("| 5.2 > Relatório de Produtos      |\n");
-    printf("| 5.3 > Retornar ao Menu Principal |\n");
+    printf("| 5.1 > Listar Clientes            |\n");
+    printf("| 5.2 > Listar Produtos            |\n");
+    printf("| 5.3 > Listar Vendas              |\n");
+    printf("| 5.4 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha: ");
+}
+
+// SESSÃƒO DE VENDA
+void salesMenu(){
+    printf(".__________- VENDAS -_______________.\n");
+    printf("|                                   |\n");
+    printf("| 2.1 > Nova Venda                  |\n");
+    printf("| 2.2 > Retirada de Caixa (Sangria) |\n");
+    printf("| 2.3 Pagamento                     |\n");
+    printf("| 2.4 Retornar ao Menu Principal    |\n");
+    printf("|___________________________________|");
     printf("\n");
     printf("Escreva sua escolha: ");
 }
