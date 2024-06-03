@@ -17,7 +17,7 @@ static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    printf("sssss");
+    //printf("sssss");
     if (products == NULL) {
        printf("Falha na alocação de memória inicial.\n");
     }
@@ -102,20 +102,33 @@ static int askNewProduct() {
 
     return addProduct(&newProduct);
 }
+
 // elimina o produto escolhido
 static void eliminateChosenProduct() {
     int codeOfProduct = 0;
     printf("Escreva o código do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
+    int found = 0;
     for(int i = 0; i < quantityProducts; i++) {
         if((products+i)->code == codeOfProduct) {
-            free((products+i));
-            printf("Produto eliminado corretamente!");
+            found = 1;
+            printf("produto encontrado");
+            // Libera a memória alocada dinamicamente para o produto a ser removido
+            free(products + i);
+
+            // Desloca os elementos à direita do elemento a ser removido uma posição para a esquerda
+            for(int j = i; j < quantityProducts - 1; j++) {
+                products[j] = products[j + 1];
+            }
+            // Reduz a quantidade de produtos no vetor
+            quantityProducts--;
+            printf("Produto eliminado corretamente!\n");
             break;
         }
-        else {
-            printf("Produto não encontrado!");
-        }
+    }
+
+    if (!found) {
+        printf("Produto não encontrado!\n");
     }
 }

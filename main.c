@@ -187,6 +187,7 @@ void mainRecords() {
     recordsMenu();
     redirectRecords();
 }
+
 void redirectRecords() {
     int choiceRecords = 0;
 
@@ -201,10 +202,10 @@ void redirectRecords() {
         callProductRecords();
         break;
     case 3:
-        initializeShop();
+        mainRecords();
         break;
     default:
-        mainRecords();
+        initializeShop();
         break;
     }
 }
