@@ -11,11 +11,11 @@ static void mainMenu(){
     printf("| 2 > Vendas                           |\n");
     printf("| 3 > Abertura de Caixa                |\n");
     printf("| 4 > Fechamento do Caixa              |\n");
-    printf("| 5 > Relatï¿½rios                       |\n");
+    printf("| 5 > Relatórios                       |\n");
     printf("| 6 > Sair                             |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o Ãºltimo nÃºmero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 // SECCAO 1:
@@ -30,7 +30,7 @@ static void registerMenu(){
     printf("| 1.3 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o Ãºltimo nÃºmero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 // SECCAO DA SECCAO CADASTRO:
@@ -45,7 +45,7 @@ static void productRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o Ãºltimo nÃºmero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 // SESSAO DA ABERTURA DE CAIXA
@@ -58,7 +58,7 @@ void cashierMenu(){
     printf("| 3.2 Retornar ao Menu Principal    |\n");
     printf("|___________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o Ãºltimo nÃºmero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 
@@ -80,8 +80,15 @@ static void recordsMenu() {
 
 static void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     cleanChat();
-
+printf(".__________- PRODUTOS CADASTRADOS -___________.\n");
     for(int i = 0; i < quantityProducts; i++) {
-        printf("%d \n", (productList+i)->code);
+        printf("%d", (productList+i)->code);
+        printf("\t\t");
+        printf("%s", (productList+i)->description);
+        printf("\t\t");
+        printf("%c", (productList+i)->category);
+        printf("\t\t");
+        printf("%0.2f", (productList+i)->price);
+        printf("\n");
     }
 }

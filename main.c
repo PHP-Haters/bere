@@ -2,7 +2,7 @@
 
 // GLOBAL VARIABLES
 float balance;
-
+int comesFromRecords = 0;
 void main(){
     setlocale(LC_ALL,"");
     defineMemoryForProducts();
@@ -123,8 +123,9 @@ void addNewProduct() {
     }
 }
 void eliminateProduct() {
+    comesFromRecords = 0;
+    callProductRecords();
     eliminateChosenProduct();
-    printf("Produto eliminado corretamente!");
     sleep(2);
     initializeShop();
 }
@@ -196,6 +197,7 @@ void redirectRecords() {
         //relatorio de clientes
         break;
     case 2:
+        comesFromRecords = 1;
         callProductRecords();
         break;
     case 3:
@@ -210,4 +212,9 @@ void callProductRecords() {
     PRODUCT *list = getProducts();
     int products = getProductQuantity();
     productRecordsMenu(list, products);
+
+    if(comesFromRecords == 1) {
+        system("pause");
+        mainRecords();
+    }
 }
