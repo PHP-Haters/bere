@@ -3,13 +3,12 @@
 void main(){
     setlocale(LC_ALL,"");
     defineMemoryForProducts();
-    inicializeShop();
+    initializeShop();
 }
 
-void inicializeShop() {
+void initializeShop() {
     mainMenu();
     redirectUser();
-
 }
 
 void redirectUser(){
@@ -38,7 +37,7 @@ void redirectUser(){
         //adicionar sair
         break;
     default:
-        inicializeShop();
+        initializeShop();
         break;
     }
 }
@@ -56,7 +55,6 @@ void redirectRegister(){
     scanf("%d", &choiceRegister);
 
     switch(choiceRegister){
-
     case 1:
         //cadastro de clientes
         break;
@@ -64,7 +62,7 @@ void redirectRegister(){
         productRegister();
         break;
     case 3:
-        inicializeShop();
+        initializeShop();
         break;
     default:
         mainRegister();
@@ -90,7 +88,7 @@ void redirectProductRegister(){
         addNewProduct();
         break;
     case 2:
-        //eliminacao de produtos
+        eliminateProduct();
         break;
     case 3:
         mainRegister();
@@ -102,9 +100,23 @@ void redirectProductRegister(){
     }
 }
 void addNewProduct() {
-    askNewProduct();
+    int returnedValue;
+    returnedValue = askNewProduct();
+
+    if(returnedValue == 1) {
+        printf("Aconteceu algum erro na hora de inserir o novo produto.");
+        system("pause");
+        initializeShop();
+    }
+    else {
+        printf("Produto adicionado corretamente!");
+        sleep(2);
+        initializeShop();
+    }
 }
 void eliminateProduct() {
-    askNewProduct();
+    eliminateChosenProduct();
+    printf("Produto eliminado corretamente!");
+    sleep(2);
+    initializeShop();
 }
-

@@ -6,9 +6,10 @@ static int quantityProducts = 3;
 static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
+    // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
+    printf("ssssss");
     if (products == NULL) {
        printf("Falha na alocação de memória inicial.\n");
-       return 1;
     }
 
     //definicao de valores default: 1 de cada loja.
@@ -27,7 +28,7 @@ static * getProducts() {
     return products;
 }
 
-static void addProduct(PRODUCT * newProduct) {
+static int addProduct(PRODUCT * newProduct) {
     quantityProducts++;
 
     PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
@@ -46,15 +47,15 @@ static void addProduct(PRODUCT * newProduct) {
     (products+quantityProducts)->sellingPrice = newProduct->sellingPrice;
     (products+quantityProducts)->stock = newProduct->stock;
     (products+quantityProducts)->minimumStock = newProduct->minimumStock;
-
+    return 0;
 }
-
-void clear (void)
+//funcao para deixa o input stream limpo
+void clear()
 {
     while ( getchar() != '\n' );
 }
 
-static void askNewProduct() {
+static int askNewProduct() {
     PRODUCT newProduct;
     clear();
 
@@ -89,5 +90,18 @@ static void askNewProduct() {
 
     newProduct.sellingPrice = 0;
     newProduct.code = 1 + (products+quantityProducts)->code;
-    addProduct(&newProduct);
+
+    return addProduct(&newProduct);
+}
+
+static void eliminateChosenProduct() {
+    int codeOfProduct = 0;
+    printf("Escreva o código do produto a ser eliminado:");
+    scanf("%d", &codeOfProduct);
+
+    int i = 0;
+    while ((products + i)->code != codeOfProduct) {
+        i++;
+    }
+    free((products+i));
 }

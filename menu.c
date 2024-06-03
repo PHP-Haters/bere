@@ -1,5 +1,5 @@
 #include "structHeader.h"
-void cleanChat() {
+static void cleanChat() {
     system("cls");
 }
 
