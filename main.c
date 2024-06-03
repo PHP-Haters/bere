@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include "menu.c"
+#include "mainHeader.h"
 
 void main(){
     inicializeShop();
@@ -11,17 +10,16 @@ void inicializeShop() {
 
 }
 
-
 void redirectUser(){
 
     int choice = 0;
 
     scanf("%d", &choice);
-    
+
     switch (choice)
     {
     case 1:
-        //adicionar cadastro
+        cadastro();
         break;
     case 2:
         //adicionar vendas
@@ -33,7 +31,7 @@ void redirectUser(){
         //adicionar fechamento de caixas
         break;
     case 5:
-        //adicionar relatorios 
+        //adicionar relatorios
         break;
     case 6:
         //adicionar sair
@@ -42,4 +40,32 @@ void redirectUser(){
         inicializeShop();
         break;
     }
+}
+
+
+void cadastro() {
+    menuCadastros();
+}
+
+void redirectCadastro(){
+
+    int choiceCadastro = 0;
+
+    switch(choiceCadastro){
+
+    case 1:
+        //cadastro de clientes
+        break;
+    case 2:
+
+        break;
+    case 3:
+        inicializeShop();
+        break;
+    default:
+        cadastro();
+        break;
+
+    }
+
 }
