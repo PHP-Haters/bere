@@ -31,7 +31,7 @@ void redirectUser(){
         //adicionar fechamento de caixas
         break;
     case 5:
-        //adicionar relatorios
+        mainRecords();
         break;
     case 6:
         //adicionar sair
@@ -138,7 +138,32 @@ void eliminateProduct() {
 
 //SECCAO
 //RELATORIOS
+void mainRecords() {
+    recordsMenu();
+    redirectRecords();
+}
+void redirectRecords() {
+    int choiceRecords = 0;
 
-void productRecords() {
+    scanf("%d", &choiceRecords);
 
+    switch(choiceRecords){
+    case 1:
+        //relatorio de clientes
+        break;
+    case 2:
+        callProductRecords();
+        break;
+    case 3:
+        initializeShop();
+        break;
+    default:
+        mainRecords();
+        break;
+    }
+}
+void callProductRecords() {
+    PRODUCT *list = getProducts();
+    int products = getProductQuantity();
+    productRecordsMenu(list, products);
 }

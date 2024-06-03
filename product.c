@@ -8,6 +8,10 @@ static * getProducts() {
     return products;
 }
 
+static int getProductQuantity() {
+    return quantityProducts;
+}
+
 // definicao de espaco de memoria
 static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos

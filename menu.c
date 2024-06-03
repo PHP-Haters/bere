@@ -35,7 +35,7 @@ static void registerMenu(){
 
 // SECCAO DA SECCAO CADASTRO:
 //PRODUTOS
-void productRegisterMenu(){
+static void productRegisterMenu(){
     cleanChat();
 
     printf("._______- CADASTRO DE PRODUTOS -_______.\n");
@@ -46,4 +46,29 @@ void productRegisterMenu(){
     printf("|______________________________________|");
     printf("\n");
     printf("Escreva sua escolha: ");
+}
+
+
+// SECCAO
+// RELATORIOS
+
+static void recordsMenu() {
+    cleanChat();
+
+    printf(".__________- CADASTROS -___________.\n");
+    printf("|                                  |\n");
+    printf("| 5.1 > Relatório de Clientes      |\n");
+    printf("| 5.2 > Relatório de Produtos      |\n");
+    printf("| 5.3 > Retornar ao Menu Principal |\n");
+    printf("|__________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha: ");
+}
+
+static void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
+    cleanChat();
+
+    for(int i = 0; i < quantityProducts; i++) {
+        printf("%d \n", (productList+i)->code);
+    }
 }
