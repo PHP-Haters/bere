@@ -1,6 +1,8 @@
 #include "mainHeader.h"
 
 void main(){
+    setlocale(LC_ALL,"");
+    defineMemoryForProducts();
     inicializeShop();
 }
 
@@ -13,13 +15,12 @@ void inicializeShop() {
 void redirectUser(){
 
     int choice = 0;
-
     scanf("%d", &choice);
 
     switch (choice)
     {
     case 1:
-        cadastro();
+        mainRegister();
         break;
     case 2:
         //adicionar vendas
@@ -42,29 +43,68 @@ void redirectUser(){
     }
 }
 
-
-void cadastro() {
-    menuCadastros();
+// Seccao:
+// CADASTRO
+void mainRegister() {
+    registerMenu();
+    redirectRegister();
 }
 
-void redirectCadastro(){
-    int choiceCadastro = 0;
+void redirectRegister(){
+    int choiceRegister = 0;
 
-    switch(choiceCadastro){
+    scanf("%d", &choiceRegister);
+
+    switch(choiceRegister){
 
     case 1:
         //cadastro de clientes
         break;
     case 2:
-
+        productRegister();
         break;
     case 3:
         inicializeShop();
         break;
     default:
-        cadastro();
+        mainRegister();
         break;
 
     }
-
 }
+
+// SECCAO DO CADASTRO:
+// PRODUTOS
+void productRegister() {
+    productRegisterMenu();
+    redirectProductRegister();
+}
+void redirectProductRegister(){
+    int choiceProductRegister = 0;
+
+    scanf("%d", &choiceProductRegister);
+
+    switch(choiceProductRegister){
+
+    case 1:
+        addNewProduct();
+        break;
+    case 2:
+        //eliminacao de produtos
+        break;
+    case 3:
+        mainRegister();
+        break;
+    default:
+        mainRegister();
+        break;
+
+    }
+}
+void addNewProduct() {
+    askNewProduct();
+}
+void eliminateProduct() {
+    askNewProduct();
+}
+

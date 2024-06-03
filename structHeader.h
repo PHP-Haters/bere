@@ -1,17 +1,18 @@
-#ifndef AVO_H
-#define AVO_H
-extern struct produto{
+#ifndef STRUCTHEADER_H
+#define STRUCTHEADER_H
+typedef struct product{
 
-    int codigo;
-    char descricao[100];
-    int categoria;
-    float preco;
-    float margemDeLucro;
-    float precoDeVenda;
-    int estoque;
-    int estoqueMinimo;
+    int code;
+    char description[100];
+    char category;
+    float price;
+    float profitMargin;
+    float sellingPrice;
+    int stock;
+    int minimumStock;
 
-};
+} PRODUCT;
 
-#endif /* AVO_H */
+
+#endif /* STRUCTHEADER_H */
 
