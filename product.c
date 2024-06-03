@@ -17,7 +17,7 @@ static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    //printf("sssss");
+    printf("sssss");
     if (products == NULL) {
        printf("Falha na alocação de memória inicial.\n");
     }
@@ -113,7 +113,6 @@ static void eliminateChosenProduct() {
     for(int i = 0; i < quantityProducts; i++) {
         if((products+i)->code == codeOfProduct) {
             found = 1;
-            printf("produto encontrado");
             // Libera a memória alocada dinamicamente para o produto a ser removido
             free(products + i);
 

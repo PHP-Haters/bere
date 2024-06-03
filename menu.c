@@ -93,15 +93,30 @@ void salesMenu(){
 
 static void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     cleanChat();
-    printf(".__________- PRODUTOS CADASTRADOS -___________.\n");
+    printf("._____________________- PRODUTOS CADASTRADOS -______________________.\n");
+
+    printf("\e[1m\033[0;36mcódigo");
+    printf("\t");
+    printf("categoria");
+    printf("\t");
+    printf("estoque");
+    printf("\t");
+    printf("preço");
+    printf("\t");
+    printf("Nome do produto \e[m \033[0m");
+    printf("\n");
+
     for(int i = 0; i < quantityProducts; i++) {
         printf("%d", (productList+i)->code);
-        printf("\t\t");
-        printf("%s", (productList+i)->description);
-        printf("\t\t");
+        printf("\t");
         printf("%c", (productList+i)->category);
-        printf("\t\t");
+        printf("\t");
+        printf("\t");
+        printf("%d", (productList+i)->stock);
+        printf("\t");
         printf("%0.2f", (productList+i)->price);
+        printf("\t");
+        printf("%s", (productList+i)->description);
         printf("\n");
     }
 }
