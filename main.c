@@ -48,7 +48,6 @@ void mainRegister() {
     registerMenu();
     redirectRegister();
 }
-
 void redirectRegister(){
     int choiceRegister = 0;
 
@@ -67,9 +66,14 @@ void redirectRegister(){
     default:
         mainRegister();
         break;
-
     }
 }
+
+
+// SECCAO DO CADASTRO:
+// CLIENTES
+
+
 
 // SECCAO DO CADASTRO:
 // PRODUTOS
@@ -119,4 +123,22 @@ void eliminateProduct() {
     printf("Produto eliminado corretamente!");
     sleep(2);
     initializeShop();
+}
+
+
+// SECCAO
+//VENDAS
+
+
+// SECCAO
+// ABERTURA DE CAIXA
+
+// SECCAO
+// FECHAMENTO DE CAIXA
+
+//SECCAO
+//RELATORIOS
+
+void productRecords() {
+
 }

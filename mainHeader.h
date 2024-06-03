@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "productTreatment.c"
+#include "product.c"
 #include "structHeader.h"
 #include "menu.c"
 
