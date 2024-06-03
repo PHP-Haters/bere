@@ -59,7 +59,7 @@ void redirectRegister(){
 
     switch(choiceRegister){
     case 1:
-        //cadastro de clientes
+        clientRegister();
         break;
     case 2:
         productRegister();
@@ -76,6 +76,55 @@ void redirectRegister(){
 
 // SECCAO DO CADASTRO:
 // CLIENTES
+void clientRegister() {
+    clientRegisterMenu();
+    redirectClientRegister();
+}
+void redirectClientRegister(){
+    int choiceClientRegister = 0;
+
+    scanf("%d", &choiceClientRegister);
+
+    switch(choiceClientRegister){
+
+    case 1:
+        addNewClient();
+        break;
+    case 2:
+        eliminateClient();
+        break;
+    case 3:
+        mainRegister();
+        break;
+    default:
+        mainRegister();
+        break;
+
+    }
+}
+void addNewClient() {
+    int returnedValue;
+    returnedValue = askNewClient();
+
+    if(returnedValue == 1) {
+        printf("Aconteceu algum erro na hora de inserir o novo produto.");
+        system("pause");
+        initializeShop();
+    }
+    else {
+        printf("Produto adicionado corretamente!");
+        sleep(2);
+        initializeShop();
+    }
+}
+void eliminateClient() {
+    comesFromRecords = 0;
+    callClientRecords();
+    eliminateChosenClient();
+    sleep(2);
+    initializeShop();
+}
+
 
 
 

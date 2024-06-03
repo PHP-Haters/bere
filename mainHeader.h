@@ -9,5 +9,6 @@
 #include "product.c"
 #include "structHeader.h"
 #include "menu.c"
+#include "client.c"
 
 #endif /* AVO_H */
