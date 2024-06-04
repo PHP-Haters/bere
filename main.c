@@ -3,9 +3,11 @@
 // GLOBAL VARIABLES
 float balance;
 int comesFromRecords = 0;
+
 void main(){
     setlocale(LC_ALL,"");
     defineMemoryForProducts();
+    defineMemoryForClients();
     initializeShop();
 }
 
@@ -45,7 +47,7 @@ void redirectUser(){
     }
 }
 
-// Seccao:
+// Secao 1:
 // CADASTRO
 void mainRegister() {
     registerMenu();
@@ -119,14 +121,11 @@ void addNewClient() {
 }
 void eliminateClient() {
     comesFromRecords = 0;
-    //callClientRecords();
+    callClientRecords();
     eliminateChosenClient();
     sleep(2);
     initializeShop();
 }
-
-
-
 
 // SECCAO DO CADASTRO:
 // PRODUTOS
@@ -180,11 +179,11 @@ void eliminateProduct() {
 }
 
 
-// SECCAO
+// SECAO 2:
 //VENDAS
 
 
-// SECCAO
+// SECCAO 3:
 // ABERTURA DE CAIXA
 
 void mainCashier(){
@@ -226,17 +225,16 @@ void openCashier(){
     initializeShop();
 }
 
-// SECCAO
+// SECCAO 4_
 // FECHAMENTO DE CAIXA
 
-//SECCAO
-//RELATORIOS
+// SECCAO 5:
+// RELATORIOS
 
 void mainRecords() {
     recordsMenu();
     redirectRecords();
 }
-
 void redirectRecords() {
     int choiceRecords = 0;
 
@@ -244,7 +242,8 @@ void redirectRecords() {
 
     switch(choiceRecords){
     case 1:
-        //relatorio de clientes
+        comesFromRecords = 1;
+        callClientRecords();
         break;
     case 2:
         comesFromRecords = 1;
@@ -262,6 +261,16 @@ void callProductRecords() {
     PRODUCT *list = getProducts();
     int products = getProductQuantity();
     productRecordsMenu(list, products);
+
+    if(comesFromRecords == 1) {
+        system("pause");
+        mainRecords();
+    }
+}
+void callClientRecords() {
+    CLIENT *list = getClients();
+    int clients = getClientQuantity();
+    clientsRecordsMenu(list, clients);
 
     if(comesFromRecords == 1) {
         system("pause");

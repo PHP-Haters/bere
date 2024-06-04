@@ -11,11 +11,11 @@ static void mainMenu(){
     printf("| 2 > Vendas                           |\n");
     printf("| 3 > Abertura de Caixa                |\n");
     printf("| 4 > Fechamento do Caixa              |\n");
-    printf("| 5 > Relat�rios                       |\n");
+    printf("| 5 > Relatórios                       |\n");
     printf("| 6 > Sair                             |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 // SECCAO 1:
@@ -30,7 +30,7 @@ static void registerMenu(){
     printf("| 1.3 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 // SECCAO DA SECCAO CADASTRO:
@@ -45,7 +45,7 @@ static void productRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
 
 static void clientRegisterMenu(){
@@ -58,39 +58,10 @@ static void clientRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o último número): ");
 }
-
-// SESSAO DA ABERTURA DE CAIXA
-void cashierMenu(){
-    cleanChat();
-
-    printf("._______- ABERTURA DE CAIXA -_______.\n");
-    printf("|                                   |\n");
-    printf("| 3.1 Abrir o caixa                 |\n");
-    printf("| 3.2 Retornar ao Menu Principal    |\n");
-    printf("|___________________________________|");
-    printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
-}
-
-
-// SECCAO
-// RELATORIOS
-static void recordsMenu() {
-    cleanChat();
-    printf(".__________- RELAT�RIOS -__________.\n");
-    printf("|                                  |\n");
-    printf("| 5.1 > Listar Clientes            |\n");
-    printf("| 5.2 > Listar Produtos            |\n");
-    printf("| 5.3 > Listar Vendas              |\n");
-    printf("| 5.4 > Retornar ao Menu Principal |\n");
-    printf("|__________________________________|");
-    printf("\n");
-    printf("Escreva sua escolha: ");
-}
-
-// SESSÃO DE VENDA
+// SECAO 2:
+// VENDA
 void salesMenu(){
     cleanChat();
     printf(".__________- VENDAS -_______________.\n");
@@ -104,11 +75,42 @@ void salesMenu(){
     printf("Escreva sua escolha: ");
 }
 
+// SESSAO 3:
+// ABERTURA DE CAIXA
+void cashierMenu(){
+    cleanChat();
+
+    printf("._______- ABERTURA DE CAIXA -_______.\n");
+    printf("|                                   |\n");
+    printf("| 3.1 Abrir o caixa                 |\n");
+    printf("| 3.2 Retornar ao Menu Principal    |\n");
+    printf("|___________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha (Apenas o último número): ");
+}
+
+
+// SECCAO 5:
+// RELATORIOS
+static void recordsMenu() {
+    cleanChat();
+    printf(".__________- RELAT�RIOS -__________.\n");
+    printf("|                                  |\n");
+    printf("| 5.1 > Listar Clientes            |\n");
+    printf("| 5.2 > Listar Produtos            |\n");
+    printf("| 5.3 > Listar Vendas              |\n");
+    printf("| 5.4 > Retornar ao Menu Principal |\n");
+    printf("|__________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha: ");
+}
+//SECAO DE RELATORIOS:
+// PRODUTO
 static void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     cleanChat();
     printf("._____________________- PRODUTOS CADASTRADOS -______________________.\n");
 
-    printf("\e[1m\033[0;36mc�digo");
+    printf("\e[1m\033[0;36mcódigo");
     printf("\t");
     printf("categoria");
     printf("\t");
@@ -130,6 +132,39 @@ static void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
         printf("%0.2f", (productList+i)->price);
         printf("\t");
         printf("%s", (productList+i)->description);
+        printf("\n");
+    }
+}
+//SECAO DE RELATORIOS:
+// CLIENTE
+static void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
+    cleanChat();
+    printf("._____________________- CLIENTES CADASTRADOS -______________________.\n");
+
+    printf("\e[1m\033[0;36mcódigo");
+    printf("\t");
+    printf("\t");
+    printf("Nome Social");
+    printf("\t");
+    printf("\t");
+    printf("celular");
+    printf("\t");
+    printf("\t");
+    printf("Bairro \e[m \033[0m");
+    printf("\n");
+
+    for(int i = 0; i < clientQuantity; i++) {
+        printf("%d", (clientList+i)->code);
+        printf("\t");
+        printf("\t");
+        printf("%s", (clientList+i)->socialName);
+        printf("\t");
+        printf("\t");
+        printf("%d", (clientList+i)->cellphone);
+        printf("\t");
+        printf("\t");
+        printf("%s", (clientList+i)->neighborhood);
+        printf("\t");
         printf("\n");
     }
 }

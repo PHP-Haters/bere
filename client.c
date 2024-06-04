@@ -23,29 +23,29 @@ static void defineMemoryForClients() {
     }
 
     //definicao de valores default: 1 de cada loja.
-    (clients)->code = 1; 
-    strcpy((clients)->name, "Caio Caleb Ramos"); 
+    (clients)->code = 1;
+    strcpy((clients)->name, "Caio Caleb Ramos");
     strcpy((clients)->socialName, "Betina");
-    (clients)->cpf = 80903233592;
+    (clients)->cpf = 12332112;
     strcpy((clients)->address, "Rua Cinco, 112");
-    strcpy((clients)->neighborhood, "Centro Politico Administrativo");
-    (clients)->cellphone = 6938194244;
+    strcpy((clients)->neighborhood, "Centro Politico Adm.");
+    (clients)->cellphone = 0422400;
 
-    (clients+1)->code = 2; 
-    strcpy((clients+1)->name, "Maite Evelyn Bernardes"); 
+    (clients+1)->code = 2;
+    strcpy((clients+1)->name, "Maite Evelyn Bernardes");
     strcpy((clients+1)->socialName, "Maimai");
-    (clients+1)->cpf = 98298636627;
+    (clients+1)->cpf = 98636627;
     strcpy((clients+1)->address, "Alameda Mutum, 69");
     strcpy((clients+1)->neighborhood, "Coqueiro");
-    (clients+1)->cellphone = 9128822275;
+    (clients+1)->cellphone = 822275;
 
-    (clients+2)->code = 3; 
-    strcpy((clients+2)->name, "Benjamin Claudio Assuncao"); 
+    (clients+2)->code = 3;
+    strcpy((clients+2)->name, "Benjamin Claudio Assuncao");
     strcpy((clients+2)->socialName, "Ben 10");
-    (clients+2)->cpf = 96036347006;
+    (clients+2)->cpf = 9607006;
     strcpy((clients+2)->address, "Rua Parime, 192");
     strcpy((clients+2)->neighborhood, "Sao Vicente");
-    (clients+2)->cellphone = 9528330752;
+    (clients+2)->cellphone = 8330752;
 }
 
 // adiciona o novo produto dentro da lista de produtos
@@ -59,7 +59,7 @@ static int addClient(CLIENT * newClient) {
        free(temp);
        return 1;
     }
-    
+
     clients = temp;
 
     strcpy((clients+(quantityClients-1))->name, newClient->name);
@@ -102,7 +102,7 @@ static int askNewClient() {
     printf("Rua com numero: ");
     fgets(newClient.address, 100, stdin);
     printf("\n");
-  
+
 
     printf("Bairro: ");
     fgets(newClient.neighborhood, 100, stdin);
