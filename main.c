@@ -109,12 +109,12 @@ void addNewClient() {
     returnedValue = askNewClient();
 
     if(returnedValue == 1) {
-        printf("Aconteceu algum erro na hora de inserir o novo produto.");
+        printf("Erro ao inserir novo cliente.");
         system("pause");
         initializeShop();
     }
     else {
-        printf("Produto adicionado corretamente!");
+        printf("Cliente adicionado corretamente!");
         sleep(2);
         initializeShop();
     }
