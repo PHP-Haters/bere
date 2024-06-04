@@ -8,6 +8,7 @@ void main(){
     setlocale(LC_ALL,"");
     defineMemoryForProducts();
     defineMemoryForClients();
+    defineMemoryForSales();
     initializeShop();
 }
 
@@ -27,7 +28,7 @@ void redirectUser(){
         mainRegister();
         break;
     case 2:
-        //adicionar vendas
+        mainSales();
         break;
     case 3:
         mainCashier();
@@ -182,7 +183,43 @@ void eliminateProduct() {
 // SECAO 2:
 //VENDAS
 
+void mainSales() {
+    salesMenu();
+    redirectSales();
+}
+void redirectSales() {
+    int saleChoice = 0;
+    scanf("%d", &saleChoice);
 
+    switch (saleChoice){
+    case 1:
+        startSale();
+        break;
+    case 2:
+        //retirar no caixa
+        break;
+    case 3:
+        //Realizar Pagamento
+        break;
+    case 4:
+        initializeShop();
+        break;
+    default:
+        printf("Digite uma opção válida!");
+        sleep(2);
+        mainCashier();
+        break;
+    }
+}
+
+void startSale() {
+    callProductRecords();
+    int redirection = askNewSale(getProducts(), getProductQuantity());
+
+    if(redirection < 1) {
+        mainSales();
+    }
+}
 // SECCAO 3:
 // ABERTURA DE CAIXA
 
