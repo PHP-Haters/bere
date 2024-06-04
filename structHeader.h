@@ -15,14 +15,12 @@ typedef struct product{
 
 typedef struct client{
     int code;
-    char description[100];
-    char category;
-    float price;
-    float profitMargin;
-    float sellingPrice;
-    int stock;
-    int minimumStock;
-    
+    char name[100];
+    char socialName[100];
+    int cpf;
+    char address[100];
+    char neighborhood[100];
+    int cellphone;
 } CLIENT;
 
 typedef struct sale{

@@ -23,17 +23,29 @@ static void defineMemoryForClients() {
     }
 
     //definicao de valores default: 1 de cada loja.
-    (clients)->code = 1; strcpy((clients)->description, "Detergente"); (clients)->category = 'L';
-    (clients)->price = 1.99;
-    (clients+1)->code = 2; strcpy((clients+1)->description, "Caf�"); (clients+1)->category = 'A';
-    (clients+1)->price = 19.99;
-    (clients+2)->code = 3; strcpy((clients+2)->description, "Pao de Forma"); (clients+2)->category = 'P';
-    (clients+2)->price = 9.5;
+    (clients)->code = 1; 
+    strcpy((clients)->name, "Caio Caleb Ramos"); 
+    strcpy((clients)->socialName, "Betina");
+    (clients)->cpf = 80903233592;
+    strcpy((clients)->address, "Rua Cinco, 112");
+    strcpy((clients)->neighborhood, "Centro Politico Administrativo");
+    (clients)->cellphone = 6938194244;
 
-    for(int i = 0; i < 3; i++) {
-        (clients+i)->sellingPrice = 0; (clients+i)->profitMargin = 0.1;
-        (clients+i)->stock = 20; (clients+i)->minimumStock = 5;
-    }
+    (clients+1)->code = 2; 
+    strcpy((clients+1)->name, "Maite Evelyn Bernardes"); 
+    strcpy((clients+1)->socialName, "Maimai");
+    (clients+1)->cpf = 98298636627;
+    strcpy((clients+1)->address, "Alameda Mutum, 69");
+    strcpy((clients+1)->neighborhood, "Coqueiro");
+    (clients+1)->cellphone = 9128822275;
+
+    (clients+2)->code = 3; 
+    strcpy((clients+2)->name, "Benjamin Claudio Assuncao"); 
+    strcpy((clients+2)->socialName, "Ben 10");
+    (clients+2)->cpf = 96036347006;
+    strcpy((clients+2)->address, "Rua Parime, 192");
+    strcpy((clients+2)->neighborhood, "Sao Vicente");
+    (clients+2)->cellphone = 9528330752;
 }
 
 // adiciona o novo produto dentro da lista de produtos
@@ -43,19 +55,20 @@ static int addClient(CLIENT * newClient) {
     CLIENT *temp = realloc(clients, quantityClients * sizeof(CLIENT));
 
     if (temp == NULL) {
-       printf("Falha na realoca��o de mem�ria.\n");
+       printf("Falha na realocção de memória.\n");
        free(temp);
        return 1;
     }
+    
     clients = temp;
-    (clients+(quantityClients-1))->code = newClient->code;
-    (clients+(quantityClients-1))->category = newClient->category;
-    strcpy((clients+(quantityClients-1))->description, newClient->description);
-    (clients+(quantityClients-1))->price = newClient->price;
-    (clients+(quantityClients-1))->profitMargin = newClient->profitMargin;
-    (clients+(quantityClients-1))->sellingPrice = newClient->sellingPrice;
-    (clients+(quantityClients-1))->stock = newClient->stock;
-    (clients+(quantityClients-1))->minimumStock = newClient->minimumStock;
+
+    strcpy((clients+(quantityClients-1))->name, newClient->name);
+    strcpy((clients+(quantityClients-1))->socialName, newClient->socialName);
+    strcpy((clients+(quantityClients-1))->address, newClient->address);
+    strcpy((clients+(quantityClients-1))->neighborhood, newClient->neighborhood);
+    (clients+(quantityClients-1))->cpf = newClient->cpf;
+    (clients+(quantityClients-1))->cellphone = newClient->cellphone;
+
     return 0;
 }
 
@@ -68,36 +81,33 @@ static int askNewClient() {
     CLIENT newClient;
     clearInputStream();
 
-    printf("descri��o: ");
-    fgets(newClient.description, 100, stdin);
+    printf("Nome: ");
+    fgets(newClient.name, 100, stdin);
     printf("\n");
 
-    printf("Pre�o: ");
-    scanf("%f", &newClient.price);
+    printf("Nome Social: ");
+    fgets(newClient.socialName, 100, stdin);
+    printf("\n");
+
+    printf("Cpf: ");
+    scanf("%d", &newClient.cpf);
     printf("\n");
     clearInputStream();
 
-    while(newClient.category != 'L' && newClient.category != 'P' && newClient.category != 'A' ) {
-        printf("Categoria (L - limpeza, P - Padaria, A - alimentos): ");
-        scanf("%c", &newClient.category);
-        clearInputStream();
-    }
+    printf("Celular: ");
+    scanf("%d", &newClient.cellphone);
     printf("\n");
-
-    printf("Margem de lucro: ");
-    scanf("%f", &newClient.profitMargin);
     clearInputStream();
+
+    printf("Rua com numero: ");
+    fgets(newClient.address, 100, stdin);
+    printf("\n");
+  
+
+    printf("Bairro: ");
+    fgets(newClient.neighborhood, 100, stdin);
     printf("\n");
 
-    printf("Estoque atual: ");
-    scanf("%d", &newClient.stock);
-    printf("\n");
-
-    printf("Estoque m�nimo: ");
-    scanf("%d", &newClient.minimumStock);
-    printf("\n");
-
-    newClient.sellingPrice = 0;
     newClient.code = 1 + (clients+(quantityClients-1))->code;
 
     return addClient(&newClient);
