@@ -217,7 +217,9 @@ void startSale() {
     int redirection = askNewSale(getProducts(), getProductQuantity());
 
     if(redirection < 1) {
-        mainSales();
+        initializeShop();
+    } else {
+        startSale();
     }
 }
 // SECCAO 3:

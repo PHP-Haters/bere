@@ -30,8 +30,9 @@ typedef struct sale{
     float rawPrice;
     float gain;
     float finalPrice;
-    int quantityOnStock;
-    int minimumStock;
+    PRODUCT produtos[100];
+    int quantity[100];
+    CLIENT cliente;
 } SALE;
 
 #endif /* STRUCTHEADER_H */

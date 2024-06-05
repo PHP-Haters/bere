@@ -1,6 +1,10 @@
 #include "structHeader.h"
 
 static SALE *sales;
+static SALE currentSale;
+
+static int salePosition = 0;
+static int productPosition = 0;
 static int quantitySales = 3;
 static PRODUCT *productsListGlobal;
 static int productsOnListGlobal = 0;
@@ -22,7 +26,7 @@ static void defineMemoryForSales() {
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
     printf("sssss");
     if (sales == NULL) {
-       printf("Falha na alocação de memória inicial.\n");
+       printf("Falha na alocaï¿½ï¿½o de memï¿½ria inicial.\n");
     }
 }
 
@@ -30,6 +34,7 @@ static void defineMemoryForSales() {
 static int validateProduct(int productCode){
     for(int i = 0; i < productsOnListGlobal; i++){
         if((productsListGlobal+i)->code == productCode){
+            productPosition = i;
             return 0;
         }
     }
@@ -59,14 +64,25 @@ static int  checkStock(int productCode, int quantityAsked){
     }
 }
 
+static void addToNewSale(int quantity) {
+    currentSale.produtos[salePosition] = *(productsListGlobal+productPosition); 
+    currentSale.quantity[salePosition] = quantity;
+    salePosition++;
+    (productsListGlobal+productPosition)->stock -= quantity;
+}
+
 static int askNewSale(PRODUCT *productList, int productsOnList) {
     int productCode = 0;
     int quantity = 0;
     productsListGlobal = productList;
     productsOnListGlobal = productsOnList;
 
-    printf("Diga o código do produto: ");
+    printf("Diga o cï¿½digo do produto  ou digite 0 para voltar: ");
     scanf("%d", &productCode);
+    if (productCode == 0){
+        return 0;
+    }
+    
 
     //Verify if product exists
     int verification = 0;
@@ -90,4 +106,5 @@ static int askNewSale(PRODUCT *productList, int productsOnList) {
     if(stockIsAvailible == 0){ // Error on stock
         return 0;
     }
+    addToNewSale(quantity);
 }
