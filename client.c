@@ -1,3 +1,4 @@
+
 #include "structHeader.h"
 
 static CLIENT *clients;
@@ -18,7 +19,7 @@ static void defineMemoryForClients() {
     clients = malloc(quantityClients * sizeof(CLIENT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
     printf("sssss");
-    if (clients == NULL) {
+    if (clients == 0 ) {
        printf("Falha na aloca��o de mem�ria inicial.\n");
     }
 
@@ -54,7 +55,7 @@ static int addClient(CLIENT * newClient) {
 
     CLIENT *temp = realloc(clients, quantityClients * sizeof(CLIENT));
 
-    if (temp == NULL) {
+    if (temp == 0) {
        printf("Falha na realocção de memória.\n");
        free(temp);
        return 1;
@@ -136,7 +137,6 @@ static void eliminateChosenClient() {
             break;
         }
     }
-
     if (!found) {
         printf("Produto n�o encontrado!\n");
     }

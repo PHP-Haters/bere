@@ -1,3 +1,4 @@
+
 #include "structHeader.h"
 
 static SALE *sales;
@@ -65,7 +66,7 @@ static int  checkStock(int productCode, int quantityAsked){
 }
 
 static void addToNewSale(int quantity) {
-    currentSale.produtos[salePosition] = *(productsListGlobal+productPosition); 
+    currentSale.produtos[salePosition] = *(productsListGlobal+productPosition);
     currentSale.quantity[salePosition] = quantity;
     salePosition++;
     (productsListGlobal+productPosition)->stock -= quantity;
@@ -82,7 +83,7 @@ static int askNewSale(PRODUCT *productList, int productsOnList) {
     if (productCode == 0){
         return 0;
     }
-    
+
 
     //Verify if product exists
     int verification = 0;

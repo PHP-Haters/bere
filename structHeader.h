@@ -1,3 +1,4 @@
+
 #ifndef STRUCTHEADER_H
 #define STRUCTHEADER_H
 
@@ -35,4 +36,5 @@ typedef struct sale{
     CLIENT cliente;
 } SALE;
 
+void cleanChat();
 #endif /* STRUCTHEADER_H */

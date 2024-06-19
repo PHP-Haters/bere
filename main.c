@@ -1,22 +1,40 @@
-#include "mainHeader.h"
+#include "headerMain.h"
 
 // GLOBAL VARIABLES
 float balance;
-int comesFromRecords = 0;
+
+//GLOBAL FUNCTION
+void cleanChat() {
+    system("cls");
+}
+
 
 void main(){
     setlocale(LC_ALL,"");
-    defineMemoryForProducts();
     defineMemoryForClients();
-    defineMemoryForSales();
+    defineMemoryForProducts();
     initializeShop();
 }
 
 void initializeShop() {
     mainMenu();
-    redirectUser();
 }
+void mainMenu(){
+    cleanChat();
+    printf(".________- MERCEARIA DA BERE -_________.\n");
+    printf("|                                      |\n");
+    printf("| 1 > Cadastro                         |\n");
+    printf("| 2 > Vendas                           |\n");
+    printf("| 3 > Abertura de Caixa                |\n");
+    printf("| 4 > Fechamento do Caixa              |\n");
+    printf("| 5 > Relatórios                       |\n");
+    printf("| 6 > Sair                             |\n");
+    printf("|______________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha (Apenas o último número): ");
+    redirectUser();
 
+}
 void redirectUser(){
 
     int choice = 0;
@@ -46,190 +64,29 @@ void redirectUser(){
         initializeShop();
         break;
     }
-}
 
-// Secao 1:
-// CADASTRO
-void mainRegister() {
-    registerMenu();
-    redirectRegister();
-}
-
-void redirectRegister(){
-    int choiceRegister = 0;
-
-    scanf("%d", &choiceRegister);
-
-    switch(choiceRegister){
-    case 1:
-        clientRegister();
-        break;
-    case 2:
-        productRegister();
-        break;
-    case 3:
-        initializeShop();
-        break;
-    default:
-        mainRegister();
-        break;
-    }
-}
-
-
-// SECCAO DO CADASTRO:
-// CLIENTES
-void clientRegister() {
-    clientRegisterMenu();
-    redirectClientRegister();
-}
-void redirectClientRegister(){
-    int choiceClientRegister = 0;
-
-    scanf("%d", &choiceClientRegister);
-
-    switch(choiceClientRegister){
-
-    case 1:
-        addNewClient();
-        break;
-    case 2:
-        eliminateClient();
-        break;
-    case 3:
-        mainRegister();
-        break;
-    default:
-        mainRegister();
-        break;
-
-    }
-}
-void addNewClient() {
-    int returnedValue;
-    returnedValue = askNewClient();
-
-    if(returnedValue == 1) {
-        printf("Erro ao inserir novo cliente.");
-        system("pause");
-        initializeShop();
-    }
-    else {
-        printf("Cliente adicionado corretamente!");
-        sleep(2);
-        initializeShop();
-    }
-}
-void eliminateClient() {
-    comesFromRecords = 0;
-    callClientRecords();
-    eliminateChosenClient();
-    sleep(2);
     initializeShop();
 }
 
-// SECCAO DO CADASTRO:
-// PRODUTOS
-void productRegister() {
-    productRegisterMenu();
-    redirectProductRegister();
-}
-void redirectProductRegister(){
-    int choiceProductRegister = 0;
-
-    scanf("%d", &choiceProductRegister);
-
-    switch(choiceProductRegister){
-
-    case 1:
-        addNewProduct();
-        break;
-    case 2:
-        eliminateProduct();
-        break;
-    case 3:
-        mainRegister();
-        break;
-    default:
-        mainRegister();
-        break;
-
-    }
-}
-void addNewProduct() {
-    int returnedValue;
-    returnedValue = askNewProduct();
-
-    if(returnedValue == 1) {
-        printf("Aconteceu algum erro na hora de inserir o novo produto.");
-        system("pause");
-        initializeShop();
-    }
-    else {
-        printf("Produto adicionado corretamente!");
-        sleep(2);
-        initializeShop();
-    }
-}
-void eliminateProduct() {
-    comesFromRecords = 0;
-    callProductRecords();
-    eliminateChosenProduct();
-    sleep(2);
-    initializeShop();
-}
-
-
-// SECAO 2:
-//VENDAS
-
-void mainSales() {
-    salesMenu();
-    redirectSales();
-}
-void redirectSales() {
-    int saleChoice = 0;
-    scanf("%d", &saleChoice);
-
-    switch (saleChoice){
-    case 1:
-        startSale();
-        break;
-    case 2:
-        //retirar no caixa
-        break;
-    case 3:
-        //Realizar Pagamento
-        break;
-    case 4:
-        initializeShop();
-        break;
-    default:
-        printf("Digite uma opção válida!");
-        sleep(2);
-        mainCashier();
-        break;
-    }
-}
-
-void startSale() {
-    callProductRecords();
-    int redirection = askNewSale(getProducts(), getProductQuantity());
-
-    if(redirection < 1) {
-        initializeShop();
-    } else {
-        startSale();
-    }
-}
 // SECCAO 3:
 // ABERTURA DE CAIXA
 
 void mainCashier(){
     cashierMenu();
+}
+void cashierMenu(){
+    cleanChat();
+
+    printf("._______- ABERTURA DE CAIXA -_______.\n");
+    printf("|                                   |\n");
+    printf("| 3.1 Abrir o caixa                 |\n");
+    printf("| 3.2 Retornar ao Menu Principal    |\n");
+    printf("|___________________________________|");
+    printf("\n");
+    printf("Escreva sua escolha (Apenas o último número): ");
+
     redirectCashier();
 }
-
 void redirectCashier(){
     int choice = 0;
 
@@ -262,57 +119,4 @@ void openCashier(){
     system("cls");
 
     initializeShop();
-}
-
-// SECCAO 4_
-// FECHAMENTO DE CAIXA
-
-// SECCAO 5:
-// RELATORIOS
-
-void mainRecords() {
-    recordsMenu();
-    redirectRecords();
-}
-void redirectRecords() {
-    int choiceRecords = 0;
-
-    scanf("%d", &choiceRecords);
-
-    switch(choiceRecords){
-    case 1:
-        comesFromRecords = 1;
-        callClientRecords();
-        break;
-    case 2:
-        comesFromRecords = 1;
-        callProductRecords();
-        break;
-    case 3:
-        mainRecords();
-        break;
-    default:
-        initializeShop();
-        break;
-    }
-}
-void callProductRecords() {
-    PRODUCT *list = getProducts();
-    int products = getProductQuantity();
-    productRecordsMenu(list, products);
-
-    if(comesFromRecords == 1) {
-        system("pause");
-        mainRecords();
-    }
-}
-void callClientRecords() {
-    CLIENT *list = getClients();
-    int clients = getClientQuantity();
-    clientsRecordsMenu(list, clients);
-
-    if(comesFromRecords == 1) {
-        system("pause");
-        mainRecords();
-    }
 }
