@@ -90,7 +90,7 @@ static int askNewSale(PRODUCT *productList, int productsOnList) {
     verification = validateProduct(productCode);
 
     if(verification > 0){
-        system("cls");
+        system("cls || clear");
         printf("Produto nao encontrado!");
         sleep(3);
         return 0;

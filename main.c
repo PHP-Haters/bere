@@ -5,7 +5,7 @@ float balance;
 
 //GLOBAL FUNCTION
 void cleanChat() {
-    system("cls");
+    system("cls || clear");
 }
 
 
@@ -108,15 +108,15 @@ void redirectCashier(){
 }
 
 void openCashier(){
-    system("cls");
+    system("cls || clear");
     printf("Digite um saldo para o caixa: ");
     scanf("%d", &balance);
 
-    system("cls");
+    system("cls || clear");
     printf("Caixa setado com sucesso!");
     sleep(3);
 
-    system("cls");
+    system("cls || clear");
 
     initializeShop();
 }
