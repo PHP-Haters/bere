@@ -18,7 +18,7 @@ static void defineMemoryForClients() {
     //definicao de memoria da lista de produtos
     clients = malloc(quantityClients * sizeof(CLIENT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    printf("sssss");
+    // printf("sssss");
     if (clients == 0 ) {
        printf("Falha na aloca��o de mem�ria inicial.\n");
     }

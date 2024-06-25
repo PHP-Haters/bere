@@ -25,7 +25,7 @@ static void defineMemoryForSales() {
     //definicao de memoria da lista de vendas
     sales = malloc(quantitySales * sizeof(PRODUCT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    printf("sssss");
+    // printf("sssss");
     if (sales == NULL) {
        printf("Falha na aloca��o de mem�ria inicial.\n");
     }

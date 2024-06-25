@@ -17,15 +17,15 @@ static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    printf("sssss");
+    // printf("sssss");
     if (products == NULL) {
-       printf("Falha na alocação de memória inicial.\n");
+       printf("Falha na alocaï¿½ï¿½o de memï¿½ria inicial.\n");
     }
 
     //definicao de valores default: 1 de cada loja.
     (products)->code = 1; strcpy((products)->description, "Detergente"); (products)->category = 'L';
     (products)->price = 1.99;
-    (products+1)->code = 2; strcpy((products+1)->description, "Café"); (products+1)->category = 'A';
+    (products+1)->code = 2; strcpy((products+1)->description, "Cafï¿½"); (products+1)->category = 'A';
     (products+1)->price = 19.99;
     (products+2)->code = 3; strcpy((products+2)->description, "Pao de Forma"); (products+2)->category = 'P';
     (products+2)->price = 9.5;
@@ -43,7 +43,7 @@ static int addProduct(PRODUCT * newProduct) {
     PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
 
     if (temp == NULL) {
-       printf("Falha na realocação de memória.\n");
+       printf("Falha na realocaï¿½ï¿½o de memï¿½ria.\n");
        free(temp);
        return 1;
     }
@@ -68,11 +68,11 @@ static int askNewProduct() {
     PRODUCT newProduct;
     clear();
 
-    printf("descrição: ");
+    printf("descriï¿½ï¿½o: ");
     fgets(newProduct.description, 100, stdin);
     printf("\n");
 
-    printf("Preço: ");
+    printf("Preï¿½o: ");
     scanf("%f", &newProduct.price);
     printf("\n");
     clear();
@@ -93,7 +93,7 @@ static int askNewProduct() {
     scanf("%d", &newProduct.stock);
     printf("\n");
 
-    printf("Estoque mínimo: ");
+    printf("Estoque mï¿½nimo: ");
     scanf("%d", &newProduct.minimumStock);
     printf("\n");
 
@@ -106,17 +106,17 @@ static int askNewProduct() {
 // elimina o produto escolhido
 static void eliminateChosenProduct() {
     int codeOfProduct = 0;
-    printf("Escreva o código do produto a ser eliminado: ");
+    printf("Escreva o cï¿½digo do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
     int found = 0;
     for(int i = 0; i < quantityProducts; i++) {
         if((products+i)->code == codeOfProduct) {
             found = 1;
-            // Libera a memória alocada dinamicamente para o produto a ser removido
+            // Libera a memï¿½ria alocada dinamicamente para o produto a ser removido
             free(products + i);
 
-            // Desloca os elementos à direita do elemento a ser removido uma posição para a esquerda
+            // Desloca os elementos ï¿½ direita do elemento a ser removido uma posiï¿½ï¿½o para a esquerda
             for(int j = i; j < quantityProducts - 1; j++) {
                 products[j] = products[j + 1];
             }
@@ -128,7 +128,7 @@ static void eliminateChosenProduct() {
     }
 
     if (!found) {
-        printf("Produto não encontrado!\n");
+        printf("Produto nï¿½o encontrado!\n");
     }
 }
 
