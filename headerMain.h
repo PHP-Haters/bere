@@ -11,6 +11,7 @@
 #include "registerMain.c"
 #include "salesMain.c"
 #include "recordsMain.c"
+#include "login.c"
 
 void mainRegister();
 void mainSales();

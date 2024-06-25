@@ -8,7 +8,6 @@ void cleanChat() {
     system("cls || clear");
 }
 
-
 void main(){
     setlocale(LC_ALL,"");
     defineMemoryForClients();
@@ -17,8 +16,10 @@ void main(){
 }
 
 void initializeShop() {
+    initializeLogin();
     mainMenu();
 }
+
 void mainMenu(){
     cleanChat();
     printf(".________- MERCEARIA DA BERE -_________.\n");
@@ -33,8 +34,8 @@ void mainMenu(){
     printf("\n");
     printf("Escreva sua escolha (Apenas o último número): ");
     redirectUser();
-
 }
+
 void redirectUser(){
 
     int choice = 0;
@@ -74,6 +75,7 @@ void redirectUser(){
 void mainCashier(){
     cashierMenu();
 }
+
 void cashierMenu(){
     cleanChat();
 
@@ -87,6 +89,7 @@ void cashierMenu(){
 
     redirectCashier();
 }
+
 void redirectCashier(){
     int choice = 0;
 

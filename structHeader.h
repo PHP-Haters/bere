@@ -2,6 +2,12 @@
 #ifndef STRUCTHEADER_H
 #define STRUCTHEADER_H
 
+typedef struct user{
+    char login[12];
+    char password[8];
+    int type;
+} USER;
+
 typedef struct product{
     int code;
     char description[100];
