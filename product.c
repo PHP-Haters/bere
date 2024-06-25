@@ -41,11 +41,18 @@ static int addProduct(PRODUCT * newProduct) {
     quantityProducts++;
 
     PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
+    FILE *file;
+
+    file = fopen("products.dat", "ab");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
 
     if (temp == NULL) {
-       printf("Falha na realoca��o de mem�ria.\n");
-       free(temp);
-       return 1;
+        printf("Falha na realoca��o de mem�ria.\n");
+        free(temp);
+        return 1;
     }
     products = temp;
     (products+(quantityProducts-1))->code = newProduct->code;
@@ -56,7 +63,27 @@ static int addProduct(PRODUCT * newProduct) {
     (products+(quantityProducts-1))->sellingPrice = newProduct->sellingPrice;
     (products+(quantityProducts-1))->stock = newProduct->stock;
     (products+(quantityProducts-1))->minimumStock = newProduct->minimumStock;
+
+    fwrite(&temp, sizeof(PRODUCT), 1, file);
     return 0;
+}
+
+static void listProducts() {
+    PRODUCT p;
+    FILE *file;
+
+    file = fopen("products.dat", "rb");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    while (fread(&p, sizeof(PRODUCT), 1, file) == 1) {
+        printf("Código: %d, Descrição: %s, Categoria: %c, Preço: R$ %.2f, Margem de Lucro: %.2f%%, Preço de Venda: R$ %.2f, Estoque: %d, Estoque Mínimo: %d\n",
+               p.code, p.description, p.category, p.price, p.profitMargin, p.sellingPrice, p.stock, p.minimumStock);
+    }
+
+    fclose(file);
 }
 
 //funcao para deixa o input stream limpo
