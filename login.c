@@ -1,12 +1,12 @@
 #include "structHeader.h"
 
-static USER *users;
-static int usersQuantity = 2;
+USER *users;
+int usersQuantity = 2;
 
-static void defineMemoryForUsers(){
+void defineMemoryForUsers(){
     users = malloc(usersQuantity * sizeof(USER));
 
-    if (users == NULL) {
+    if (users == 0) {
         printf("Falha na alocacao de memoria dos usuarios iniciais.\n");
     }
 
@@ -20,7 +20,7 @@ static void defineMemoryForUsers(){
     (users+1)->type = 1;
 }
 
-static void mainLogin(){
+void mainLogin(){
     char hasAccount;
 
     printf("Vamos logar no sistema!\n");
@@ -29,13 +29,13 @@ static void mainLogin(){
     scanf(" %c", &hasAccount);
 
     if(hasAccount == 'n'){
-        createAccount();
+        //createAccount();
     } else {
         login();
     }
 }
 
-static int login(){
+int login(){
     char userName[12], userPassword[8];
 
     system("cls || clear");
@@ -57,7 +57,7 @@ static int login(){
     }
 }
 
-static int checkCredentials(char name[12], char password[8]){
+int checkCredentials(char name[12], char password[8]){
     int userPosition;
 
     // Find user with provided name
