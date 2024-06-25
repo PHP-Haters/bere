@@ -16,6 +16,7 @@
 void mainRegister();
 void mainSales();
 void mainRecords();
+void mainLogin();
 
 #endif /* AVO_H */
 

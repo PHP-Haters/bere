@@ -16,7 +16,7 @@ void main(){
 }
 
 void initializeShop() {
-    initializeLogin();
+    mainLogin();
     mainMenu();
 }
 

@@ -20,7 +20,7 @@ static void defineMemoryForUsers(){
     (users+1)->type = 1;
 }
 
-static void initializeLogin(){
+static void mainLogin(){
     char hasAccount;
 
     printf("Vamos logar no sistema!\n");
