@@ -1,7 +1,7 @@
 #include "structHeader.h"
 
 USER *users;
-int usersQuantity = 2;
+int usersQuantity = 3;
 
 void defineMemoryForUsers(){
     users = malloc(usersQuantity * sizeof(USER));
@@ -12,20 +12,23 @@ void defineMemoryForUsers(){
 
     // Standard users definition:
     strcpy((users)->login, "berenice");
-    strcpy((users)->password, "berenice");
+    strcpy((users)->password, "bere123");
     (users)->type = 1;
 
     strcpy((users+1)->login, "jorjao");
-    strcpy((users+1)->password, "jorjao");
-    (users+1)->type = 1;
+    strcpy((users+1)->password, "jorje69");
+    (users+1)->type = 2;
+
+    strcpy((users+2)->login, "foster");
+    strcpy((users+2)->password, "jp1604");
+    (users+2)->type = 1;
 }
 
 void mainLogin(){
     char hasAccount;
 
     printf("Vamos logar no sistema!\n");
-
-    printf("Você já possui conta? (s/n)");
+    printf("Voce ja possui conta (s/n)? ");
     scanf(" %c", &hasAccount);
 
     if(hasAccount == 'n'){
@@ -35,43 +38,55 @@ void mainLogin(){
     }
 }
 
-int login(){
+void login(){
     char userName[12], userPassword[8];
 
     system("cls || clear");
+    clearInputStream();
 
     printf("\nDigite seu nome de usuario: ");
-    scanf("%s", userName);
+    fgets(userName, 12, stdin);
+    strtok(userName, "\n");
 
-    printf("\nDigite a sua senha: ");
-    scanf("%s", userPassword);
+    printf("Digite a sua senha: ");
+    fgets(userPassword, 8, stdin);
+    strtok(userPassword, "\n");
 
     int credentialsChecked = checkCredentials(userName, userPassword);
 
-    if(credentialsChecked == 1){
-        return 1;
-    } else {
-        printf("Credenciais incorretas! Por favor tente novamente em alguns instantes.");
+    if(credentialsChecked != 1){
+        printf("\nCredenciais incorretas! Por favor tente novamente em alguns instantes.\n");
         sleep(3);
         login();
     }
+
+    printf("\nLogin realizado com sucesso!\n");
+    sleep(3);
 }
 
 int checkCredentials(char name[12], char password[8]){
-    int userPosition;
+    int userPosition = -1, userFound = 0;
 
     // Find user with provided name
     for (int i = 0; i < usersQuantity; i++){
-        if (strcmp((users+i)->login, name) == 0){
+        int comparison = strcmp((users+i)->login, name);
+
+        if (comparison == 0){
+            printf("\nUsuario encontrado.\n");
             userPosition = i;
-        } else {
-            printf("\nUsuário não encontrado!\n");
-            return 0;
+            userFound = 1;
+            break;
         }
+    }
+
+    if(userFound != 1){
+        printf("\nUsuario nao encontrado!\n");
+        return 0;
     }
 
     // Check password
     if(strcmp((users+userPosition)->password, password) != 0){
+        printf("%d", strcmp((users+userPosition)->password, password));
         return 0;
     }
 

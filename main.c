@@ -12,6 +12,7 @@ void main(){
     setlocale(LC_ALL,"");
     defineMemoryForClients();
     defineMemoryForProducts();
+    defineMemoryForUsers();
     initializeShop();
 }
 
