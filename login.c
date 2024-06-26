@@ -32,7 +32,7 @@ void mainLogin(){
     scanf(" %c", &hasAccount);
 
     if(hasAccount == 'n'){
-        //createAccount();
+        createAccount();
     } else {
         login();
     }
@@ -61,17 +61,17 @@ void login(){
     }
 
     int correctPassword = validatePassword(userPassword, userPosition);
-    
+
     if(correctPassword != 1){
         printf("senha incorreta, tente novamente em alguns instantes!");
         sleep(3);
-        login();    
+        login();
     }
 
     printf("\nLogin realizado com sucesso!\n");
     sleep(3);
 }
-   
+
 int userExists(char name[12]){
     // Checks if user exists and return its position
     int userPosition = -1;
@@ -80,7 +80,6 @@ int userExists(char name[12]){
         int comparison = strcmp((users+i)->login, name);
 
         if (comparison == 0){
-            printf("\nUsuario encontrado.\n");
             userPosition = i;
             break;
         }
@@ -95,4 +94,33 @@ int validatePassword(char password[8], int userPosition){
     }
 
     return 1;
+}
+
+
+void createAccount(){
+    char newName[12], newPassword[8];
+
+    clearInputStream();
+    system("cls || clear");
+
+    printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
+    fgets(newName, 12, stdin);
+
+    int nameLength = strlen(newName);
+
+    // Validate number of characters
+    if ((nameLength - 1) < 8) {
+        printf("Menos de 8 caracteres, vamos tentar novamente...");
+        sleep(2);
+        createAccount();
+    }
+
+    // Validate if user already exists
+    int userExistence = userExists(newName);
+
+    if(userExistence == -1){
+        printf("O usuario ja existe em nosso sistema, por favor, use outro nome");
+        sleep(2);
+        createAccount();
+    }
 }
