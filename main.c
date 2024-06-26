@@ -13,11 +13,11 @@ void main(){
     defineMemoryForClients();
     defineMemoryForProducts();
     defineMemoryForUsers();
+    mainLogin();
     initializeShop();
 }
-
+    
 void initializeShop() {
-    mainLogin();
     mainMenu();
 }
 

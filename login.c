@@ -52,39 +52,43 @@ void login(){
     fgets(userPassword, 8, stdin);
     strtok(userPassword, "\n");
 
-    int credentialsChecked = checkCredentials(userName, userPassword);
+    int userPosition = userExists(userName);
 
-    if(credentialsChecked != 1){
-        printf("\nCredenciais incorretas! Por favor tente novamente em alguns instantes.\n");
+    if(userPosition == -1){
+        printf("\n usuario nao encontrado, tente novamente!\n");
         sleep(3);
         login();
+    }
+
+    int correctPassword = validatePassword(userPassword, userPosition);
+    
+    if(correctPassword != 1){
+        printf("senha incorreta, tente novamente em alguns instantes!");
+        sleep(3);
+        login();    
     }
 
     printf("\nLogin realizado com sucesso!\n");
     sleep(3);
 }
+   
+int userExists(char name[12]){
+    // Checks if user exists and return its position
+    int userPosition = -1;
 
-int checkCredentials(char name[12], char password[8]){
-    int userPosition = -1, userFound = 0;
-
-    // Find user with provided name
     for (int i = 0; i < usersQuantity; i++){
         int comparison = strcmp((users+i)->login, name);
 
         if (comparison == 0){
             printf("\nUsuario encontrado.\n");
             userPosition = i;
-            userFound = 1;
             break;
         }
     }
+    return userPosition;
+}
 
-    if(userFound != 1){
-        printf("\nUsuario nao encontrado!\n");
-        return 0;
-    }
-
-    // Check password
+int validatePassword(char password[8], int userPosition){
     if(strcmp((users+userPosition)->password, password) != 0){
         printf("%d", strcmp((users+userPosition)->password, password));
         return 0;
