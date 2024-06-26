@@ -16,24 +16,40 @@ static int getProductQuantity() {
 static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
-    // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    // printf("sssss");
     if (products == NULL) {
        printf("Falha na aloca��o de mem�ria inicial.\n");
     }
+}
+static void readFile(FILE *filePointer) {
 
-    //definicao de valores default: 1 de cada loja.
-    (products)->code = 1; strcpy((products)->description, "Detergente"); (products)->category = 'L';
-    (products)->price = 1.99;
-    (products+1)->code = 2; strcpy((products+1)->description, "Caf�"); (products+1)->category = 'A';
-    (products+1)->price = 19.99;
-    (products+2)->code = 3; strcpy((products+2)->description, "Pao de Forma"); (products+2)->category = 'P';
-    (products+2)->price = 9.5;
+    PRODUCT *aux = malloc(1 * sizeof(PRODUCT));
 
-    for(int i = 0; i < 3; i++) {
-        (products+i)->sellingPrice = 0; (products+i)->profitMargin = 0.1;
-        (products+i)->stock = 20; (products+i)->minimumStock = 5;
+    filePointer = fopen("productDatabase.bin", "rb");
+    int i = 1;
+    while(1) {
+        quantityProducts = fread(aux, sizeof(PRODUCT), i, filePointer);
+        if(feof(filePointer)) {
+            defineMemoryForProducts();
+            products = aux;
+            printf("Name: %d %s \n", (products+(i-1))->code, (products+(i-1))->description);
+            break;
+        }
+        PRODUCT *temp = realloc(aux, i+1 * sizeof(PRODUCT));
+        aux = temp;
+        i++;
     }
+}
+static void createOrFindFile() {
+
+    FILE *filePointer = fopen("productDatabase.bin", "ab");
+    PRODUCT input1 = { 1, "rohan"};
+    PRODUCT bruh;
+
+    if(filePointer == 0) {
+        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+    }
+    fclose(filePointer);
+    readFile(filePointer);
 }
 
 // adiciona o novo produto dentro da lista de produtos

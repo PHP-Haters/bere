@@ -10,13 +10,13 @@ void cleanChat() {
 
 void main(){
     setlocale(LC_ALL,"");
+    createOrFindFile();
     defineMemoryForClients();
-    defineMemoryForProducts();
     defineMemoryForUsers();
     mainLogin();
     initializeShop();
 }
-    
+
 void initializeShop() {
     mainMenu();
 }
