@@ -27,14 +27,15 @@ static void readFile(FILE *filePointer) {
     filePointer = fopen("productDatabase.bin", "rb");
     int i = 1;
     while(1) {
-        quantityProducts = fread(aux, sizeof(PRODUCT), i, filePointer);
+        fread(aux, sizeof(PRODUCT), i, filePointer);
         if(feof(filePointer)) {
             defineMemoryForProducts();
             products = aux;
-            printf("Name: %d %s \n", (products+(i-1))->code, (products+(i-1))->description);
+            quantityProducts = (i-1);
+            
             break;
         }
-        PRODUCT *temp = realloc(aux, i+1 * sizeof(PRODUCT));
+        PRODUCT *temp = realloc(aux, (i+1) * sizeof(PRODUCT));
         aux = temp;
         i++;
     }
@@ -42,8 +43,6 @@ static void readFile(FILE *filePointer) {
 static void createOrFindFile() {
 
     FILE *filePointer = fopen("productDatabase.bin", "ab");
-    PRODUCT input1 = { 1, "rohan"};
-    PRODUCT bruh;
 
     if(filePointer == 0) {
         printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
@@ -59,7 +58,7 @@ static int addProduct(PRODUCT * newProduct) {
     PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
     FILE *file;
 
-    file = fopen("products.dat", "ab");
+    file = fopen("productDatabase.bin", "wb");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return;
@@ -79,8 +78,15 @@ static int addProduct(PRODUCT * newProduct) {
     (products+(quantityProducts-1))->sellingPrice = newProduct->sellingPrice;
     (products+(quantityProducts-1))->stock = newProduct->stock;
     (products+(quantityProducts-1))->minimumStock = newProduct->minimumStock;
+    
+    for(int j = 1; j < quantityProducts; j++) {
+        fwrite((products+j), sizeof(PRODUCT), quantityProducts, file);
 
-    fwrite(&temp, sizeof(PRODUCT), 1, file);
+
+        printf("%d %s %0.2f \n", (products+j)->code, (products+j)->description, (products+j)->price);
+            printf("%d", quantityProducts);
+    }
+    fclose(file);
     return 0;
 }
 
@@ -88,7 +94,7 @@ static void listProducts() {
     PRODUCT p;
     FILE *file;
 
-    file = fopen("products.dat", "rb");
+    file = fopen("productDatabase.bin", "rb");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return;

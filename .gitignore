@@ -4,3 +4,6 @@
 /main.exe
 
 /main.o
+main
+/productDatabase.bin
+products.dat

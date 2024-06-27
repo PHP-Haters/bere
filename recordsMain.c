@@ -45,7 +45,32 @@ void callProductRecords() {
 }
 void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     cleanChat();
-    listProducts();
+    printf("._____________________- PRODUTOS CADASTRADOS -______________________.\n");
+    printf("\e[1m\033[0;36mcódigo");
+    printf("\t");
+    printf("categoria");
+    printf("\t");
+    printf("estoque");
+    printf("\t");
+    printf("pre�o");
+    printf("\t");
+    printf("Nome do produto \e[m \033[0m");
+    printf("\n");
+        printf("%d \n", quantityProducts);
+
+    for(int i = 0; i < quantityProducts; i++) {
+        printf("%d", (productList+i)->code);
+        printf("\t");
+        printf("%c", (productList+i)->category);
+        printf("\t");
+        printf("\t");
+        printf("%d", (productList+i)->stock);
+        printf("\t");
+        printf("%0.2f", (productList+i)->price);
+        printf("\t");
+        printf("%s", (productList+i)->description);
+        printf("\n");
+    }
 }
 
 void callClientRecords() {
@@ -86,6 +111,16 @@ void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
 }
 
 void pausingRecordsMenu() {
+    #if defined(_WIN32)
     system("pause");
+    #elif defined(_WIN64)
+    system("pause");
+    #elif defined(__unix__) || defined(__unix)
+        sleep(5);
+    #elif defined(__linux__)
+        sleep(5);
+    #else
+        printf("Unknown OS.\n");
+    #endif
 }
 
