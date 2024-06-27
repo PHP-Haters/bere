@@ -73,10 +73,6 @@ static int addClient(CLIENT * newClient) {
     return 0;
 }
 
-//funcao para deixa o input stream limpo
-static void clearInputStream() {
-    while ( getchar() != '\n' );
-}
 // pergunta e gfuarda a informacao de um novo produto
 static int askNewClient() {
     CLIENT newClient;
