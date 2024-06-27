@@ -15,7 +15,7 @@ void defineMemoryForUsers(){
     strcpy((users)->password, "bere123");
     (users)->type = 1;
 
-    strcpy((users+1)->login, "jorjao");
+    strcpy((users+1)->login, "jorjao01");
     strcpy((users+1)->password, "jorje69");
     (users+1)->type = 2;
 
@@ -119,6 +119,19 @@ void createAccount(){
 
     if(userExistence != -1){
         printf("O usuario ja existe em nosso sistema, por favor, use outro nome");
+        sleep(3);
+        createAccount();
+    }
+
+    // Ask for new password
+    printf("Digite uma senha (de 6 a 8 caracteres):");
+    fgets(newPassword, 8, stdin);
+
+    // Validating password length
+    int passwordLength = strlen(newPassword);
+
+    if(passwordLength < 6){
+        printf("Senha com menos de 6 caracteres, tente novamente");
         sleep(3);
         createAccount();
     }
