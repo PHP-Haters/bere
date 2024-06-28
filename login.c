@@ -15,7 +15,7 @@ void defineMemoryForUsers(){
     strcpy((users)->password, "bere123");
     (users)->type = 1;
 
-    strcpy((users+1)->login, "jorjao");
+    strcpy((users+1)->login, "jorjao01");
     strcpy((users+1)->password, "jorje69");
     (users+1)->type = 2;
 
@@ -30,6 +30,7 @@ void mainLogin(){
     printf("Vamos logar no sistema!\n");
     printf("Voce ja possui conta (s/n)? ");
     scanf(" %c", &hasAccount);
+    clearInputStream();
 
     if(hasAccount == 'n'){
         createAccount();
@@ -41,8 +42,7 @@ void mainLogin(){
 void login(){
     char userName[12], userPassword[8];
 
-    system("cls || clear");
-    clearInputStream();
+    cleanChat();
 
     printf("\nDigite seu nome de usuario: ");
     fgets(userName, 12, stdin);
@@ -84,12 +84,12 @@ int userExists(char name[12]){
             break;
         }
     }
+    
     return userPosition;
 }
 
 int validatePassword(char password[8], int userPosition){
     if(strcmp((users+userPosition)->password, password) != 0){
-        printf("%d", strcmp((users+userPosition)->password, password));
         return 0;
     }
 
@@ -100,8 +100,7 @@ int validatePassword(char password[8], int userPosition){
 void createAccount(){
     char newName[12], newPassword[8];
 
-    clearInputStream();
-    system("cls || clear");
+    cleanChat();
 
     printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
     fgets(newName, 12, stdin);
@@ -111,16 +110,29 @@ void createAccount(){
     // Validate number of characters
     if ((nameLength - 1) < 8) {
         printf("Menos de 8 caracteres, vamos tentar novamente...");
-        sleep(2);
+        sleep(3);
         createAccount();
     }
 
     // Validate if user already exists
     int userExistence = userExists(newName);
 
-    if(userExistence == -1){
+    if(userExistence != -1){
         printf("O usuario ja existe em nosso sistema, por favor, use outro nome");
-        sleep(2);
+        sleep(3);
+        createAccount();
+    }
+
+    // Ask for new password
+    printf("Digite uma senha (de 6 a 8 caracteres):");
+    fgets(newPassword, 8, stdin);
+
+    // Validating password length
+    int passwordLength = strlen(newPassword);
+
+    if(passwordLength < 6){
+        printf("Senha com menos de 6 caracteres, tente novamente");
+        sleep(3);
         createAccount();
     }
 }

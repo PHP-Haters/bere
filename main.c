@@ -3,9 +3,14 @@
 // GLOBAL VARIABLES
 float balance;
 
-//GLOBAL FUNCTION
+// GLOBAL FUNCTION
 void cleanChat() {
     system("cls || clear");
+}
+
+// CLEAR REMAINING CHARACTERS ON INPUT
+void clearInputStream() {
+    while ( getchar() != '\n' );
 }
 
 void main(){
