@@ -56,7 +56,6 @@ void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     printf("\t");
     printf("Nome do produto \e[m \033[0m");
     printf("\n");
-        printf("%d \n", quantityProducts);
 
     for(int i = 0; i < quantityProducts; i++) {
         printf("%d", (productList+i)->code);

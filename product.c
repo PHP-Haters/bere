@@ -26,19 +26,20 @@ static void readFile(FILE *filePointer) {
 
     filePointer = fopen("productDatabase.bin", "rb");
     int i = 1;
-    while(1) {
-        fread(aux, sizeof(PRODUCT), i, filePointer);
-        if(feof(filePointer)) {
-            defineMemoryForProducts();
-            products = aux;
-            quantityProducts = (i-1);
-            
-            break;
-        }
-        PRODUCT *temp = realloc(aux, (i+1) * sizeof(PRODUCT));
-        aux = temp;
+    int quantityRead = 0;
+    while(! feof(filePointer)) {
+
+        quantityRead = fread(aux, sizeof(PRODUCT), i, filePointer);
         i++;
+        PRODUCT *temp = realloc(aux, (i) * sizeof(PRODUCT));
+        aux = temp;
     }
+    quantityProducts = quantityRead;
+    defineMemoryForProducts();
+    if(quantityRead > 0) {
+        products = aux;
+    }
+
 }
 static void createOrFindFile() {
 
@@ -48,17 +49,17 @@ static void createOrFindFile() {
         printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
     }
     fclose(filePointer);
+
     readFile(filePointer);
 }
 
 // adiciona o novo produto dentro da lista de produtos
 static int addProduct(PRODUCT * newProduct) {
-    quantityProducts++;
 
     PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
     FILE *file;
 
-    file = fopen("productDatabase.bin", "wb");
+    file = fopen("productDatabase.bin", "ab");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return;
@@ -78,34 +79,14 @@ static int addProduct(PRODUCT * newProduct) {
     (products+(quantityProducts-1))->sellingPrice = newProduct->sellingPrice;
     (products+(quantityProducts-1))->stock = newProduct->stock;
     (products+(quantityProducts-1))->minimumStock = newProduct->minimumStock;
-    
+
+    fwrite(newProduct, sizeof(PRODUCT), 1, file);
     for(int j = 1; j < quantityProducts; j++) {
-        fwrite((products+j), sizeof(PRODUCT), quantityProducts, file);
-
-
         printf("%d %s %0.2f \n", (products+j)->code, (products+j)->description, (products+j)->price);
             printf("%d", quantityProducts);
     }
     fclose(file);
     return 0;
-}
-
-static void listProducts() {
-    PRODUCT p;
-    FILE *file;
-
-    file = fopen("productDatabase.bin", "rb");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        return;
-    }
-
-    while (fread(&p, sizeof(PRODUCT), 1, file) == 1) {
-        printf("Código: %d, Descrição: %s, Categoria: %c, Preço: R$ %.2f, Margem de Lucro: %.2f%%, Preço de Venda: R$ %.2f, Estoque: %d, Estoque Mínimo: %d\n",
-               p.code, p.description, p.category, p.price, p.profitMargin, p.sellingPrice, p.stock, p.minimumStock);
-    }
-
-    fclose(file);
 }
 
 //funcao para deixa o input stream limpo
@@ -146,8 +127,16 @@ static int askNewProduct() {
     scanf("%d", &newProduct.minimumStock);
     printf("\n");
 
+    quantityProducts++;
+
     newProduct.sellingPrice = 0;
-    newProduct.code = 1 + (products+(quantityProducts-1))->code;
+    if(quantityProducts == 0) {
+        newProduct.code = 1;
+    }
+    else {
+        newProduct.code = 1 + (products+(quantityProducts-1))->code;
+    }
+    
 
     return addProduct(&newProduct);
 }
@@ -155,6 +144,12 @@ static int askNewProduct() {
 // elimina o produto escolhido
 static void eliminateChosenProduct() {
     int codeOfProduct = 0;
+    FILE * file = fopen("productDatabase.bin", "wb");
+
+    if(file == 0) {
+        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+    }
+    
     printf("Escreva o c�digo do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
@@ -162,22 +157,21 @@ static void eliminateChosenProduct() {
     for(int i = 0; i < quantityProducts; i++) {
         if((products+i)->code == codeOfProduct) {
             found = 1;
+            quantityProducts--;
             // Libera a mem�ria alocada dinamicamente para o produto a ser removido
             free(products + i);
-
+            fwrite((products), sizeof(PRODUCT), quantityProducts, file);
             // Desloca os elementos � direita do elemento a ser removido uma posi��o para a esquerda
-            for(int j = i; j < quantityProducts - 1; j++) {
+            for(int j = i; j < quantityProducts; j++) {
                 products[j] = products[j + 1];
             }
             // Reduz a quantidade de produtos no vetor
-            quantityProducts--;
             printf("Produto eliminado corretamente!\n");
             break;
         }
     }
-
+    fclose(file);
     if (!found) {
         printf("Produto n�o encontrado!\n");
     }
 }
-
