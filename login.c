@@ -84,7 +84,7 @@ int userExists(char name[12]){
             break;
         }
     }
-    
+
     return userPosition;
 }
 
@@ -100,39 +100,39 @@ int validatePassword(char password[8], int userPosition){
 void createAccount(){
     char newName[12], newPassword[8];
 
-    cleanChat();
+    while (1){
+        cleanChat();
 
-    printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
-    fgets(newName, 12, stdin);
+        printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
+        fgets(newName, 12, stdin);
+        strtok(newName, "\n");
 
-    int nameLength = strlen(newName);
+        int nameLength = strlen(newName);
+        int userExistence = userExists(newName);
 
-    // Validate number of characters
-    if ((nameLength - 1) < 8) {
-        printf("Menos de 8 caracteres, vamos tentar novamente...");
-        sleep(3);
-        createAccount();
+        // Validate number of characters and if there is an user using this name
+        if (nameLength >= 8 && userExistence == -1) {
+            break;
+        } else {
+            printf("\nNome invalido, vamos tentar novamente\n");
+            sleep(3);
+        }
     }
 
-    // Validate if user already exists
-    int userExistence = userExists(newName);
+    while (1){
+        // Ask for new password
+        printf("Digite uma senha (de 6 a 8 caracteres): ");
+        fgets(newPassword, 8, stdin);
+        strtok(newPassword, "\n");
 
-    if(userExistence != -1){
-        printf("O usuario ja existe em nosso sistema, por favor, use outro nome");
-        sleep(3);
-        createAccount();
-    }
+        // Validating password length
+        int passwordLength = strlen(newPassword);
 
-    // Ask for new password
-    printf("Digite uma senha (de 6 a 8 caracteres):");
-    fgets(newPassword, 8, stdin);
-
-    // Validating password length
-    int passwordLength = strlen(newPassword);
-
-    if(passwordLength < 6){
-        printf("Senha com menos de 6 caracteres, tente novamente");
-        sleep(3);
-        createAccount();
+        if(passwordLength < 6){
+            printf("\nNumero de caracteres invalido na senha, vamos tentar novamente\n");
+            sleep(3);
+        } else {
+            break;
+        }
     }
 }

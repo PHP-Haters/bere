@@ -15,14 +15,20 @@ void clearInputStream() {
 
 void main(){
     setlocale(LC_ALL,"");
+
+    // Setting standard memory definitions
     createOrFindFile();
     defineMemoryForClients();
     defineMemoryForUsers();
+
     mainLogin();
+
     initializeShop();
 }
 
 void initializeShop() {
+    cleanChat();
+    clearInputStream();
     mainMenu();
 }
 
