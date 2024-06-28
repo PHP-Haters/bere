@@ -69,7 +69,7 @@ void login(){
     }
 
     printf("\nLogin realizado com sucesso!\n");
-    sleep(2);
+    sleep(1);
 }
 
 int userExists(char name[12]){
@@ -168,5 +168,10 @@ void createAccount(){
 }
 
 void listUsers(){
-
+    for (int i = 0; i < usersQuantity; i++){
+        printf("\nUser %d", i);
+        printf("\nUsername (login): %s", (users+i)->login);
+        printf("\nUser type (1:admin, 2:client): %d", (users+i)->type);
+        printf("\n");
+    }
 }
