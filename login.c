@@ -103,6 +103,7 @@ void createAccount(){
     while (1){
         cleanChat();
 
+        // Ask for new user name
         printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
         fgets(newName, 12, stdin);
         strtok(newName, "\n");
@@ -120,7 +121,7 @@ void createAccount(){
     }
 
     while (1){
-        // Ask for new password
+        // Ask for a new password
         printf("Digite uma senha (de 6 a 8 caracteres): ");
         fgets(newPassword, 8, stdin);
         strtok(newPassword, "\n");
@@ -135,4 +136,22 @@ void createAccount(){
             break;
         }
     }
+
+    // Add new credentials to the Users array
+    usersQuantity++;
+
+    USER *temp = realloc(users, usersQuantity * sizeof(USER)); // Realloc memory for new user
+
+    // Catch errors during memory realocation
+    if (temp == 0) {
+        printf("Falha na realocção de memória do novo usuario.\n");
+        free(temp);
+    }
+
+    users = temp; // Filling the clients array with new block of memory
+
+    // Copying new user data to the last position of user's array
+    strcpy((users+(usersQuantity-1))->login, newName);
+    strcpy((users+(usersQuantity-1))->password, newPassword);
+    (users+(usersQuantity-1))->type = 2;
 }
