@@ -53,8 +53,7 @@ void redirectUser(){
     int choice = 0;
     scanf("%d", &choice);
 
-    switch (choice)
-    {
+    switch (choice){
     case 1:
         mainRegister();
         break;

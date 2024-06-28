@@ -69,7 +69,7 @@ void login(){
     }
 
     printf("\nLogin realizado com sucesso!\n");
-    sleep(3);
+    sleep(2);
 }
 
 int userExists(char name[12]){
@@ -96,15 +96,14 @@ int validatePassword(char password[8], int userPosition){
     return 1;
 }
 
-
 void createAccount(){
-    char newName[12], newPassword[8];
+    char newName[12], newPassword[8], proceed;
 
     while (1){
         cleanChat();
 
         // Ask for new user name
-        printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
+        printf("\nDigite um nome de usuario (de 8 a 12 caracteres): ");
         fgets(newName, 12, stdin);
         strtok(newName, "\n");
 
@@ -154,4 +153,20 @@ void createAccount(){
     strcpy((users+(usersQuantity-1))->login, newName);
     strcpy((users+(usersQuantity-1))->password, newPassword);
     (users+(usersQuantity-1))->type = 2;
+
+    printf("\nNovo usuario criado com sucesso!");
+
+    // Ask if user wants to log in right now
+    clearInputStream();
+    printf("\nDeseja fazer login no sistema (s/n)? ");
+    scanf("%c", &proceed);
+
+    if(proceed == 's'){
+        clearInputStream();
+        login();
+    }
+}
+
+void listUsers(){
+
 }
