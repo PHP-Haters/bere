@@ -16,12 +16,12 @@ void defineMemoryForUsers(){
     (users)->type = 1;
 
     strcpy((users+1)->login, "jorjao01");
-    strcpy((users+1)->password, "jorje69");
+    strcpy((users+1)->password, "jorje01");
     (users+1)->type = 2;
 
-    strcpy((users+2)->login, "foster01");
-    strcpy((users+2)->password, "jp1604");
-    (users+2)->type = 1;
+    strcpy((users+2)->login, "paula123");
+    strcpy((users+2)->password, "paula123");
+    (users+2)->type = 2;
 }
 
 void mainLogin(){
