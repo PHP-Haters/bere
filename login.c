@@ -44,14 +44,17 @@ void login(){
 
     cleanChat();
 
+    // Ask for username
     printf("\nDigite seu nome de usuario: ");
     fgets(userName, 12, stdin);
     strtok(userName, "\n");
 
+    // Ask for password
     printf("Digite a sua senha: ");
     fgets(userPassword, 8, stdin);
     strtok(userPassword, "\n");
 
+    // Check if user exists and get its position
     int userPosition = userExists(userName);
 
     if(userPosition == -1){
@@ -60,6 +63,7 @@ void login(){
         login();
     }
 
+    // Check if passwords is correct
     int correctPassword = validatePassword(userPassword, userPosition);
 
     if(correctPassword != 1){
@@ -67,6 +71,24 @@ void login(){
         sleep(3);
         login();
     }
+
+    // Get user type
+    int userType = getUserType(userName);
+
+    if(userType == 0){
+        printf("\nFalha ao pegar tipo do usuario\n");
+        sleep(3);
+        login();
+    }
+
+    // Create user object
+    USER currentUser;
+    strcpy(currentUser.login, userName);
+    strcpy(currentUser.password, userPassword);
+    currentUser.type = userType;
+
+    // Send current user to global file
+    updateLoggedUser(currentUser);
 
     printf("\nLogin realizado com sucesso!\n");
     sleep(1);
@@ -174,4 +196,19 @@ void listUsers(){
         printf("\nUser type (1:admin, 2:client): %d", (users+i)->type);
         printf("\n");
     }
+}
+
+int getUserType(char username[12]){
+    int userType = 0;
+
+    // Checks if user acctually exists
+    int userPosition = userExists(username);
+    if(userPosition < 0){
+        printf("\nUsuário não encontrado na memoria\n");
+        return 0;
+    }
+
+    // Set user type to founded user
+    userType = (users+userPosition)->type;
+    return userType;
 }

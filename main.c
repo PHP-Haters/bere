@@ -1,7 +1,9 @@
 #include "headerMain.h"
+#include "structHeader.h"
 
 // GLOBAL VARIABLES
 float balance;
+USER loggedUser;
 
 // GLOBAL FUNCTION
 void cleanChat() {
@@ -11,6 +13,12 @@ void cleanChat() {
 // CLEAR REMAINING CHARACTERS ON INPUT
 void clearInputStream() {
     while ( getchar() != '\n' );
+}
+
+void updateLoggedUser(USER user){
+    strcpy(loggedUser.login, user.login);
+    strcpy(loggedUser.password, user.password);
+    loggedUser.type = user.type;
 }
 
 void main(){
@@ -35,6 +43,8 @@ void initializeShop() {
 void mainMenu(){
     cleanChat();
     printf(".________- MERCEARIA DA BERE -_________.\n");
+    printf("|                                      |\n");
+    printf("| Usuario logado: %s           |\n", loggedUser.login);
     printf("|                                      |\n");
     printf("| 1 > Cadastro                         |\n");
     printf("| 2 > Vendas                           |\n");

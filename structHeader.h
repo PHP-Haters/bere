@@ -1,4 +1,3 @@
-
 #ifndef STRUCTHEADER_H
 #define STRUCTHEADER_H
 
