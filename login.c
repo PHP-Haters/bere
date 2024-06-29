@@ -19,7 +19,7 @@ void defineMemoryForUsers(){
     strcpy((users+1)->password, "jorje69");
     (users+1)->type = 2;
 
-    strcpy((users+2)->login, "foster");
+    strcpy((users+2)->login, "foster01");
     strcpy((users+2)->password, "jp1604");
     (users+2)->type = 1;
 }
@@ -41,35 +41,42 @@ void mainLogin(){
 
 void login(){
     char userName[12], userPassword[8];
+    int userPosition;
 
-    cleanChat();
+    while (1){
+        cleanChat();
 
-    // Ask for username
-    printf("\nDigite seu nome de usuario: ");
-    fgets(userName, 12, stdin);
-    strtok(userName, "\n");
+        // Ask for username
+        printf("\nDigite seu nome de usuario: ");
+        fgets(userName, 12, stdin);
+        strtok(userName, "\n");
 
-    // Ask for password
-    printf("Digite a sua senha: ");
-    fgets(userPassword, 8, stdin);
-    strtok(userPassword, "\n");
+        // Check if user exists and get its position
+        userPosition = userExists(userName);
 
-    // Check if user exists and get its position
-    int userPosition = userExists(userName);
-
-    if(userPosition == -1){
-        printf("\n usuario nao encontrado, tente novamente!\n");
-        sleep(3);
-        login();
+        if(userPosition == -1){
+            printf("\n usuario nao encontrado, tente novamente!\n");
+            sleep(2);
+        } else {
+            break;
+        }
     }
 
-    // Check if passwords is correct
-    int correctPassword = validatePassword(userPassword, userPosition);
+    while (1){
+        // Ask for password
+        printf("\nDigite a sua senha: ");
+        fgets(userPassword, 8, stdin);
+        strtok(userPassword, "\n");
 
-    if(correctPassword != 1){
-        printf("senha incorreta, tente novamente em alguns instantes!");
-        sleep(3);
-        login();
+        // Check if passwords is correct
+        int correctPassword = validatePassword(userPassword, userPosition);
+
+        if(correctPassword != 1){
+            printf("senha incorreta, tente novamente em alguns instantes!");
+            sleep(2);
+        } else {
+            break;
+        }
     }
 
     // Get user type

@@ -44,7 +44,8 @@ void mainMenu(){
     cleanChat();
     printf(".________- MERCEARIA DA BERE -_________.\n");
     printf("|                                      |\n");
-    printf("| Usuario logado: %s           |\n", loggedUser.login);
+    printf("| Usuario logado: %s                    \n", loggedUser.login, loggedUser.type);
+    printf("| Tipo do usuario: %d                   \n", loggedUser.type);
     printf("|                                      |\n");
     printf("| 1 > Cadastro                         |\n");
     printf("| 2 > Vendas                           |\n");
