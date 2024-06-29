@@ -43,10 +43,10 @@ void login(){
     char userName[12], userPassword[8];
     int userPosition;
 
+    // Ask for username
     while (1){
         cleanChat();
 
-        // Ask for username
         printf("\nDigite seu nome de usuario: ");
         fgets(userName, 12, stdin);
         strtok(userName, "\n");
@@ -62,8 +62,8 @@ void login(){
         }
     }
 
+    // Ask for password
     while (1){
-        // Ask for password
         printf("\nDigite a sua senha: ");
         fgets(userPassword, 8, stdin);
         strtok(userPassword, "\n");
