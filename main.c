@@ -1,7 +1,9 @@
 #include "headerMain.h"
+#include "structHeader.h"
 
 // GLOBAL VARIABLES
 float balance;
+USER loggedUser;
 
 // GLOBAL FUNCTION
 void cleanChat() {
@@ -13,23 +15,38 @@ void clearInputStream() {
     while ( getchar() != '\n' );
 }
 
+void updateLoggedUser(USER user){
+    strcpy(loggedUser.login, user.login);
+    strcpy(loggedUser.password, user.password);
+    loggedUser.type = user.type;
+}
+
 void main(){
     setlocale(LC_ALL,"");
+
+    // Setting standard memory definitions
     createOrFindFile();
     createOrFindFileClient();
     defineMemoryForClients();
     defineMemoryForUsers();
+
     mainLogin();
+
     initializeShop();
 }
 
 void initializeShop() {
+    cleanChat();
+    clearInputStream();
     mainMenu();
 }
 
 void mainMenu(){
     cleanChat();
     printf(".________- MERCEARIA DA BERE -_________.\n");
+    printf("|                                      |\n");
+    printf("| Usuario logado: %s                    \n", loggedUser.login, loggedUser.type);
+    printf("| Tipo do usuario: %d                   \n", loggedUser.type);
     printf("|                                      |\n");
     printf("| 1 > Cadastro                         |\n");
     printf("| 2 > Vendas                           |\n");
@@ -48,8 +65,7 @@ void redirectUser(){
     int choice = 0;
     scanf("%d", &choice);
 
-    switch (choice)
-    {
+    switch (choice){
     case 1:
         mainRegister();
         break;
@@ -57,10 +73,12 @@ void redirectUser(){
         mainSales();
         break;
     case 3:
+        validateAdmin();
         mainCashier();
         break;
     case 4:
         //adicionar fechamento de caixas
+        validateAdmin();
         break;
     case 5:
         mainRecords();
@@ -74,6 +92,15 @@ void redirectUser(){
     }
 
     initializeShop();
+}
+
+void validateAdmin(){
+    if(loggedUser.type != 1){
+        cleanChat();
+        printf("Usuario logado atualmente não eh administrador!");
+        sleep(2);
+        initializeShop();
+    }
 }
 
 // SECCAO 3:

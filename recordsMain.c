@@ -7,10 +7,11 @@ void recordsMenu() {
     cleanChat();
     printf(".__________- RELAT�RIOS -__________.\n");
     printf("|                                  |\n");
-    printf("| 5.1 > Listar Clientes            |\n");
-    printf("| 5.2 > Listar Produtos            |\n");
-    printf("| 5.3 > Listar Vendas              |\n");
-    printf("| 5.4 > Retornar ao Menu Principal |\n");
+    printf("| 5.1 > Listar Usuarios            |\n");
+    printf("| 5.2 > Listar Clientes            |\n");
+    printf("| 5.3 > Listar Produtos            |\n");
+    printf("| 5.4 > Listar Vendas              |\n");
+    printf("| 5.5 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
     printf("\n");
     printf("Escreva sua escolha: ");
@@ -23,19 +24,25 @@ void redirectRecords() {
     scanf("%d", &choiceRecords);
 
     switch(choiceRecords){
-    case 1:
-        callClientRecords();
-        pausingRecordsMenu();
-        break;
-    case 2:
-        callProductRecords();
-        pausingRecordsMenu();
-        break;
-    case 3:
-        break;
-    default:
-        mainRecords();
-        break;
+        case 1:
+            listUsers();
+            pausingRecordsMenu();
+            break;
+        case 2:
+            callClientRecords();
+            pausingRecordsMenu();
+            break;
+        case 3:
+            callProductRecords();
+            pausingRecordsMenu();
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        default:
+            mainRecords();
+            break;
     }
 }
 void callProductRecords() {

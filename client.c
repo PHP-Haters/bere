@@ -1,4 +1,3 @@
-
 #include "structHeader.h"
 
 static CLIENT *clients;
@@ -16,7 +15,9 @@ static int getClientQuantity() {
 // definicao de espaco de memoria
 static void defineMemoryForClients() {
     //definicao de memoria da lista de produtos
+
     clients = malloc(quantityClients * sizeof(CLIENT));
+
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
     // printf("sssss");
     if (clients == 0 ) {

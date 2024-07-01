@@ -16,12 +16,12 @@ void defineMemoryForUsers(){
     (users)->type = 1;
 
     strcpy((users+1)->login, "jorjao01");
-    strcpy((users+1)->password, "jorje69");
+    strcpy((users+1)->password, "jorje01");
     (users+1)->type = 2;
 
-    strcpy((users+2)->login, "foster");
-    strcpy((users+2)->password, "jp1604");
-    (users+2)->type = 1;
+    strcpy((users+2)->login, "paula123");
+    strcpy((users+2)->password, "paula123");
+    (users+2)->type = 2;
 }
 
 void mainLogin(){
@@ -41,35 +41,64 @@ void mainLogin(){
 
 void login(){
     char userName[12], userPassword[8];
+    int userPosition;
 
-    cleanChat();
+    // Ask for username
+    while (1){
+        cleanChat();
 
-    printf("\nDigite seu nome de usuario: ");
-    fgets(userName, 12, stdin);
-    strtok(userName, "\n");
+        printf("\nDigite seu nome de usuario: ");
+        fgets(userName, 12, stdin);
+        strtok(userName, "\n");
 
-    printf("Digite a sua senha: ");
-    fgets(userPassword, 8, stdin);
-    strtok(userPassword, "\n");
+        // Check if user exists and get its position
+        userPosition = userExists(userName);
 
-    int userPosition = userExists(userName);
+        if(userPosition == -1){
+            printf("\n usuario nao encontrado, tente novamente!\n");
+            sleep(2);
+        } else {
+            break;
+        }
+    }
 
-    if(userPosition == -1){
-        printf("\n usuario nao encontrado, tente novamente!\n");
+    // Ask for password
+    while (1){
+        printf("\nDigite a sua senha: ");
+        fgets(userPassword, 8, stdin);
+        strtok(userPassword, "\n");
+
+        // Check if passwords is correct
+        int correctPassword = validatePassword(userPassword, userPosition);
+
+        if(correctPassword != 1){
+            printf("senha incorreta, tente novamente em alguns instantes!");
+            sleep(2);
+        } else {
+            break;
+        }
+    }
+
+    // Get user type
+    int userType = getUserType(userName);
+
+    if(userType == 0){
+        printf("\nFalha ao pegar tipo do usuario\n");
         sleep(3);
         login();
     }
 
-    int correctPassword = validatePassword(userPassword, userPosition);
+    // Create user object
+    USER currentUser;
+    strcpy(currentUser.login, userName);
+    strcpy(currentUser.password, userPassword);
+    currentUser.type = userType;
 
-    if(correctPassword != 1){
-        printf("senha incorreta, tente novamente em alguns instantes!");
-        sleep(3);
-        login();
-    }
+    // Send current user to global file
+    updateLoggedUser(currentUser);
 
     printf("\nLogin realizado com sucesso!\n");
-    sleep(3);
+    sleep(1);
 }
 
 int userExists(char name[12]){
@@ -84,7 +113,7 @@ int userExists(char name[12]){
             break;
         }
     }
-    
+
     return userPosition;
 }
 
@@ -96,43 +125,97 @@ int validatePassword(char password[8], int userPosition){
     return 1;
 }
 
-
 void createAccount(){
-    char newName[12], newPassword[8];
+    char newName[12], newPassword[8], proceed;
 
-    cleanChat();
+    while (1){
+        cleanChat();
 
-    printf("\nDigite um nome de usuario (minimo de 8 caracteres): ");
-    fgets(newName, 12, stdin);
+        // Ask for new user name
+        printf("\nDigite um nome de usuario (de 8 a 12 caracteres): ");
+        fgets(newName, 12, stdin);
+        strtok(newName, "\n");
 
-    int nameLength = strlen(newName);
+        int nameLength = strlen(newName);
+        int userExistence = userExists(newName);
 
-    // Validate number of characters
-    if ((nameLength - 1) < 8) {
-        printf("Menos de 8 caracteres, vamos tentar novamente...");
-        sleep(3);
-        createAccount();
+        // Validate number of characters and if there is an user using this name
+        if (nameLength >= 8 && userExistence == -1) {
+            break;
+        } else {
+            printf("\nNome invalido, vamos tentar novamente\n");
+            sleep(3);
+        }
     }
 
-    // Validate if user already exists
-    int userExistence = userExists(newName);
+    while (1){
+        // Ask for a new password
+        printf("Digite uma senha (de 6 a 8 caracteres): ");
+        fgets(newPassword, 8, stdin);
+        strtok(newPassword, "\n");
 
-    if(userExistence != -1){
-        printf("O usuario ja existe em nosso sistema, por favor, use outro nome");
-        sleep(3);
-        createAccount();
+        // Validating password length
+        int passwordLength = strlen(newPassword);
+
+        if(passwordLength < 6){
+            printf("\nNumero de caracteres invalido na senha, vamos tentar novamente\n");
+            sleep(3);
+        } else {
+            break;
+        }
     }
 
-    // Ask for new password
-    printf("Digite uma senha (de 6 a 8 caracteres):");
-    fgets(newPassword, 8, stdin);
+    // Add new credentials to the Users array
+    usersQuantity++;
 
-    // Validating password length
-    int passwordLength = strlen(newPassword);
+    USER *temp = realloc(users, usersQuantity * sizeof(USER)); // Realloc memory for new user
 
-    if(passwordLength < 6){
-        printf("Senha com menos de 6 caracteres, tente novamente");
-        sleep(3);
-        createAccount();
+    // Catch errors during memory realocation
+    if (temp == 0) {
+        printf("Falha na realocção de memória do novo usuario.\n");
+        free(temp);
     }
+
+    users = temp; // Filling the clients array with new block of memory
+
+    // Copying new user data to the last position of user's array
+    strcpy((users+(usersQuantity-1))->login, newName);
+    strcpy((users+(usersQuantity-1))->password, newPassword);
+    (users+(usersQuantity-1))->type = 2;
+
+    printf("\nNovo usuario criado com sucesso!");
+
+    // Ask if user wants to log in right now
+    clearInputStream();
+    printf("\nDeseja fazer login no sistema (s/n)? ");
+    scanf("%c", &proceed);
+
+    if(proceed == 's'){
+        clearInputStream();
+        login();
+    }
+}
+
+void listUsers(){
+    for (int i = 0; i < usersQuantity; i++){
+        printf("\nUser %d", i);
+        printf("\nUsername (login): %s", (users+i)->login);
+        printf("\nUser type (1:admin, 2:client): %d", (users+i)->type);
+        printf("\n");
+    }
+}
+
+int getUserType(char username[12]){
+    int userType = 0;
+
+    // Checks if user acctually exists
+    int userPosition = userExists(username);
+    if(userPosition < 0){
+        printf("\nUsuário não encontrado na memoria\n");
+        return 0;
+    }
+
+    // Set user type to founded user
+    userType = (users+userPosition)->type;
+    return userType;
 }

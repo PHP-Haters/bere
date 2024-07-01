@@ -9,12 +9,13 @@ void registerMenu(){
 
     printf(".__________- CADASTROS -___________.\n");
     printf("|                                  |\n");
-    printf("| 1.1 > Cadastro de Clientes       |\n");
-    printf("| 1.2 > Cadastro de Produtos       |\n");
-    printf("| 1.3 > Retornar ao Menu Principal |\n");
+    printf("| 1.1 > Cadastro de Usuario        |\n");
+    printf("| 1.2 > Cadastro de Clientes       |\n");
+    printf("| 1.3 > Cadastro de Produtos       |\n");
+    printf("| 1.4 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o último número): ");
+    printf("Escreva sua escolha (Apenas o ï¿½ltimo nï¿½mero): ");
 
     redirectRegister();
 }
@@ -25,12 +26,16 @@ void redirectRegister(){
 
     switch(choiceRegister){
     case 1:
-        clientRegister();
+        clearInputStream();
+        createAccount();
         break;
     case 2:
-        productRegister();
+        clientRegister();
         break;
     case 3:
+        productRegister();
+        break;
+    case 4:
         break;
     default:
         mainRegister();
@@ -53,7 +58,7 @@ void clientRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o último número): ");
+    printf("Escreva sua escolha (Apenas o ï¿½ltimo nï¿½mero): ");
 
     redirectClientRegister();
 }
@@ -119,7 +124,7 @@ void productRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o último número): ");
+    printf("Escreva sua escolha (Apenas o ï¿½ltimo nï¿½mero): ");
 
     redirectProductRegister();
 }
