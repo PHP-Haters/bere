@@ -168,8 +168,6 @@ void addNewProduct() {
     }
 }
 void eliminateProduct() {
-
-//    callProductRecords();
     eliminateChosenProduct();
     sleep(2);
     mainRegister();

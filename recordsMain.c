@@ -63,7 +63,10 @@ void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     printf("\t");
     printf("Nome do produto \e[m \033[0m");
     printf("\n");
-
+    if (quantityProducts == 0) {
+        printf("Nenhum produto cadastrado.\n");
+        return;
+    }
     for(int i = 0; i < quantityProducts; i++) {
         printf("%d", (productList+i)->code);
         printf("\t");
@@ -77,6 +80,7 @@ void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
         printf("%s", (productList+i)->description);
         printf("\n");
     }
+
 }
 
 void callClientRecords() {
@@ -90,28 +94,24 @@ void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
 
     printf("\e[1m\033[0;36mcódigo");
     printf("\t");
-    printf("\t");
     printf("Nome Social");
-    printf("\t");
     printf("\t");
     printf("celular");
     printf("\t");
-    printf("\t");
     printf("Bairro \e[m \033[0m");
     printf("\n");
-
+    if (clientQuantity == 0) {
+        printf("Nenhum produto cadastrado.\n");
+        return;
+    }
     for(int i = 0; i < clientQuantity; i++) {
-        printf("%d", (clientList+i)->code);
+        printf("%d", (productList+i)->code);
         printf("\t");
+        printf("%s", (productList+i)->socialName);
         printf("\t");
-        printf("%s", (clientList+i)->socialName);
+        printf("%d", (productList+i)->cellphone);
         printf("\t");
-        printf("\t");
-        printf("%d", (clientList+i)->cellphone);
-        printf("\t");
-        printf("\t");
-        printf("%s", (clientList+i)->neighborhood);
-        printf("\t");
+        printf("%s", (productList+i)->neighborhood);
         printf("\n");
     }
 }

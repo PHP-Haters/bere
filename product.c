@@ -53,37 +53,28 @@ static void createOrFindFile() {
     readFile(filePointer);
 }
 
-// adiciona o novo produto dentro da lista de produtos
-static int addProduct(PRODUCT * newProduct) {
-
-    PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
-    FILE *file;
-
-    file = fopen("productDatabase.bin", "ab");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        return;
-    }
-
+// Adiciona o novo produto dentro da lista de produtos
+static int addProduct(PRODUCT *newProduct) {
+    PRODUCT *temp = realloc(products, (quantityProducts + 1) * sizeof(PRODUCT));
     if (temp == NULL) {
-        printf("Falha na realoca��o de mem�ria.\n");
-        free(temp);
-        return 1;
+        printf("Falha na realocação de memória.\n");
+        return 1; // Indica falha
     }
     products = temp;
-    (products+(quantityProducts-1))->code = newProduct->code;
-    (products+(quantityProducts-1))->category = newProduct->category;
-    strcpy((products+(quantityProducts-1))->description, newProduct->description);
-    (products+(quantityProducts-1))->price = newProduct->price;
-    (products+(quantityProducts-1))->profitMargin = newProduct->profitMargin;
-    (products+(quantityProducts-1))->sellingPrice = newProduct->sellingPrice;
-    (products+(quantityProducts-1))->stock = newProduct->stock;
-    (products+(quantityProducts-1))->minimumStock = newProduct->minimumStock;
+    products[quantityProducts] = *newProduct; // Copia novo produto para o array
+    quantityProducts++; // Incrementa a quantidade de produtos
+
+    FILE *file = fopen("productDatabase.bin", "ab");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return 1; // Indica falha
+    }
 
     fwrite(newProduct, sizeof(PRODUCT), 1, file);
     fclose(file);
-    return 0;
+    return 0; // Sucesso
 }
+
 
 //funcao para deixa o input stream limpo
 void clear() {
@@ -130,44 +121,46 @@ static int askNewProduct() {
         newProduct.code = 1;
     }
     else {
-        newProduct.code = 1 + (products+(quantityProducts-1))->code;
+        newProduct.code = 1 + quantityProducts;
     }
     
 
     return addProduct(&newProduct);
 }
 
-// elimina o produto escolhido
-static void eliminateChosenProduct() {
+int eliminateChosenProduct() {
+    int foundIndex = -1;
     int codeOfProduct = 0;
-    FILE * file = fopen("productDatabase.bin", "wb");
-
-    if(file == 0) {
-        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
-    }
     
     printf("Escreva o c�digo do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
-    int found = 0;
-    for(int i = 0; i < quantityProducts; i++) {
-        if((products+i)->code == codeOfProduct) {
-            found = 1;
-            quantityProducts--;
-            // Libera a mem�ria alocada dinamicamente para o produto a ser removido
-            free(products + i);
-            fwrite((products), sizeof(PRODUCT), quantityProducts, file);
-            // Desloca os elementos � direita do elemento a ser removido uma posi��o para a esquerda
-            for(int j = i; j < quantityProducts; j++) {
-                products[j] = products[j + 1];
-            }
-            // Reduz a quantidade de produtos no vetor
-            printf("Produto eliminado corretamente!\n");
+    for (int i = 0; i < quantityProducts; i++) {
+        if (products[i].code == codeOfProduct) {
+            foundIndex = i;
             break;
         }
     }
-    fclose(file);
-    if (!found) {
-        printf("Produto n�o encontrado!\n");
+
+    if (foundIndex == -1) {
+        printf("Produto com código %d não encontrado.\n", codeOfProduct);
+        return 1; // Produto não encontrado
     }
+
+    // Deslocar todos os produtos após o índice encontrado uma posição para trás
+    for (int i = foundIndex; i < quantityProducts - 1; i++) {
+        products[i] = products[i + 1];
+    }
+
+    // Realocar o array de produtos para o novo tamanho
+    quantityProducts--;
+    PRODUCT *temp = realloc(products, quantityProducts * sizeof(PRODUCT));
+    if (temp == NULL && quantityProducts > 0) { // Falha na realocação, exceto quando o array é agora vazio
+        printf("Falha ao realocar memória ao excluir produto.\n");
+        return 1; // Falha na realocação
+    }
+    products = temp;
+
+    printf("Produto excluído com sucesso.\n");
+    return 0; // Sucesso
 }
