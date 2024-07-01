@@ -26,6 +26,7 @@ void defineMemoryForUsers(){
 
 void mainLogin(){
     char hasAccount;
+    cleanChat();
 
     printf("Vamos logar no sistema!\n");
     printf("Voce ja possui conta (s/n)? ");
@@ -72,7 +73,7 @@ void login(){
         int correctPassword = validatePassword(userPassword, userPosition);
 
         if(correctPassword != 1){
-            printf("senha incorreta, tente novamente em alguns instantes!");
+            printf("\nsenha incorreta, tente novamente!\n");
             sleep(2);
         } else {
             break;

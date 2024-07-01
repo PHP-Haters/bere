@@ -53,7 +53,7 @@ void mainMenu(){
     printf("| 3 > Abertura de Caixa                |\n");
     printf("| 4 > Fechamento do Caixa              |\n");
     printf("| 5 > Relatórios                       |\n");
-    printf("| 6 > Sair                             |\n");
+    printf("| 6 > Sair (Logoff)                    |\n");
     printf("|______________________________________|");
     printf("\n");
     printf("Escreva sua escolha (Apenas o último número): ");
@@ -84,7 +84,8 @@ void redirectUser(){
         mainRecords();
         break;
     case 6:
-        //adicionar sair
+        mainLogin();
+        initializeShop();
         break;
     default:
         initializeShop();
