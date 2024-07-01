@@ -5,7 +5,7 @@ void mainRecords() {
 }
 void recordsMenu() {
     cleanChat();
-    printf(".__________- RELAT�RIOS -__________.\n");
+    printf(".__________- RELATORIOS -__________.\n");
     printf("|                                  |\n");
     printf("| 5.1 > Listar Usuarios            |\n");
     printf("| 5.2 > Listar Clientes            |\n");
@@ -59,7 +59,7 @@ void productRecordsMenu(PRODUCT *productList, int quantityProducts) {
     printf("\t");
     printf("estoque");
     printf("\t");
-    printf("pre�o");
+    printf("preco");
     printf("\t");
     printf("Nome do produto \e[m \033[0m");
     printf("\n");

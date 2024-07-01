@@ -21,7 +21,7 @@ static void defineMemoryForClients() {
     // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
     // printf("sssss");
     if (clients == 0 ) {
-       printf("Falha na aloca��o de mem�ria inicial.\n");
+       printf("Falha na alocacao de memoria inicial.\n");
     }
 
     //definicao de valores default: 1 de cada loja.
@@ -76,7 +76,7 @@ static void createOrFindFileClient() {
     FILE *filePointer = fopen("clientDatabase.bin", "ab");
 
     if(filePointer == 0) {
-        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+        printf("Arquivo nao encontrado; impossivel cria-lo (Produtos)");
     }
     fclose(filePointer);
 
@@ -97,7 +97,7 @@ static int addClient(CLIENT * newClient) {
     }
 
     if (temp == 0) {
-       printf("Falha na realocção de memória.\n");
+       printf("Falha na realocção de memoria.\n");
        free(temp);
        return 1;
     }
@@ -157,7 +157,7 @@ static int askNewClient() {
 // elimina o produto escolhido
 static void eliminateChosenClient() {
     int codeOfClient = 0;
-    printf("Escreva o c�digo do produto a ser eliminado: ");
+    printf("Escreva o codigo do produto a ser eliminado: ");
     scanf("%d", &codeOfClient);
 
     int found = 0;
@@ -178,6 +178,6 @@ static void eliminateChosenClient() {
         }
     }
     if (!found) {
-        printf("Produto n�o encontrado!\n");
+        printf("Produto nao encontrado!\n");
     }
 }

@@ -17,7 +17,7 @@ static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
     if (products == NULL) {
-       printf("Falha na aloca��o de mem�ria inicial.\n");
+       printf("Falha na alocacao de memoria inicial.\n");
     }
 }
 static void readFile(FILE *filePointer) {
@@ -66,7 +66,7 @@ static int addProduct(PRODUCT * newProduct) {
     }
 
     if (temp == NULL) {
-        printf("Falha na realoca��o de mem�ria.\n");
+        printf("Falha na realocacao de memoria.\n");
         free(temp);
         return 1;
     }
@@ -94,11 +94,11 @@ static int askNewProduct() {
     PRODUCT newProduct;
     clear();
 
-    printf("descri��o: ");
+    printf("descricao: ");
     fgets(newProduct.description, 100, stdin);
     printf("\n");
 
-    printf("Pre�o: ");
+    printf("Preco: ");
     scanf("%f", &newProduct.price);
     printf("\n");
     clear();
@@ -119,7 +119,7 @@ static int askNewProduct() {
     scanf("%d", &newProduct.stock);
     printf("\n");
 
-    printf("Estoque m�nimo: ");
+    printf("Estoque minimo: ");
     scanf("%d", &newProduct.minimumStock);
     printf("\n");
 
@@ -143,10 +143,10 @@ static void eliminateChosenProduct() {
     FILE * file = fopen("productDatabase.bin", "wb");
 
     if(file == 0) {
-        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+        printf("Arquivo nao encontrado; impossivel cria-lo (Produtos)");
     }
     
-    printf("Escreva o c�digo do produto a ser eliminado: ");
+    printf("Escreva o codigo do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
     int found = 0;
@@ -168,6 +168,6 @@ static void eliminateChosenProduct() {
     }
     fclose(file);
     if (!found) {
-        printf("Produto n�o encontrado!\n");
+        printf("Produto nao encontrado!\n");
     }
 }
