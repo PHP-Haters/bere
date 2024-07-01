@@ -107,17 +107,11 @@ void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
     for(int i = 0; i < clientQuantity; i++) {
         printf("%d", (productList+i)->code);
         printf("\t");
-<<<<<<< HEAD
-        printf("%s", (productList+i)->socialName);
-        printf("\t");
-        printf("%d", (productList+i)->cellphone);
-=======
         printf("%s", (clientList+i)->socialName);
         printf("\t");
         printf("%d", (clientList+i)->cellphone);
         printf("\t");
         printf("%s", (clientList+i)->neighborhood);
->>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
         printf("\t");
         printf("%s", (productList+i)->neighborhood);
         printf("\n");
