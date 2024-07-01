@@ -18,36 +18,9 @@ static void defineMemoryForClients() {
 
     clients = malloc(quantityClients * sizeof(CLIENT));
 
-    // SEM ESTE PRINTF NAO FUNCIONA NADA. NAO SEI PORQUE. VOU COMETER SUICIDIO. CARALHO.
-    // printf("sssss");
-    if (clients == 0 ) {
+    if (clients == NULL) {
        printf("Falha na alocacao de memoria inicial.\n");
     }
-
-    //definicao de valores default: 1 de cada loja.
-    (clients)->code = 1;
-    strcpy((clients)->name, "Caio Caleb Ramos");
-    strcpy((clients)->socialName, "Betina");
-    (clients)->cpf = 12332112;
-    strcpy((clients)->address, "Rua Cinco, 112");
-    strcpy((clients)->neighborhood, "Centro Politico Adm.");
-    (clients)->cellphone = 0422400;
-
-    (clients+1)->code = 2;
-    strcpy((clients+1)->name, "Maite Evelyn Bernardes");
-    strcpy((clients+1)->socialName, "Maimai");
-    (clients+1)->cpf = 98636627;
-    strcpy((clients+1)->address, "Alameda Mutum, 69");
-    strcpy((clients+1)->neighborhood, "Coqueiro");
-    (clients+1)->cellphone = 822275;
-
-    (clients+2)->code = 3;
-    strcpy((clients+2)->name, "Benjamin Claudio Assuncao");
-    strcpy((clients+2)->socialName, "Ben 10");
-    (clients+2)->cpf = 9607006;
-    strcpy((clients+2)->address, "Rua Parime, 192");
-    strcpy((clients+2)->neighborhood, "Sao Vicente");
-    (clients+2)->cellphone = 8330752;
 }
 
 static void readFileClient(FILE *filePointer) {
@@ -57,13 +30,22 @@ static void readFileClient(FILE *filePointer) {
     filePointer = fopen("clientDatabase.bin", "rb");
     int i = 1;
     int quantityRead = 0;
+    int auxQuantity = 0;
+
     while(! feof(filePointer)) {
 
         quantityRead = fread(aux, sizeof(CLIENT), i, filePointer);
+
+        if(quantityRead == 0) {
+            quantityRead = auxQuantity;
+            break;
+        }
+        auxQuantity = quantityRead;
         i++;
         CLIENT *temp = realloc(aux, (i) * sizeof(CLIENT));
         aux = temp;
     }
+
     quantityClients = quantityRead;
     defineMemoryForClients();
     if(quantityRead > 0) {
@@ -149,7 +131,14 @@ static int askNewClient() {
     fgets(newClient.neighborhood, 100, stdin);
     printf("\n");
 
-    newClient.code = 1 + (clients+(quantityClients-1))->code;
+    if(quantityClients == 0) {
+        newClient.code = 1;
+    }
+    else {
+        newClient.code = 1 + (clients+(quantityClients-1))->code;
+    }
+
+
 
     return addClient(&newClient);
 }

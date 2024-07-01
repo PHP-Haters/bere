@@ -78,7 +78,7 @@ static int askNewSale(PRODUCT *productList, int productsOnList) {
     productsListGlobal = productList;
     productsOnListGlobal = productsOnList;
 
-    printf("Diga o c�digo do produto  ou digite 0 para voltar: ");
+    printf("Diga o codigo do produto  ou digite 0 para voltar: ");
     scanf("%d", &productCode);
     if (productCode == 0){
         return 0;

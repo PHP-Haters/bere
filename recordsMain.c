@@ -88,7 +88,7 @@ void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
     cleanChat();
     printf("._____________________- CLIENTES CADASTRADOS -______________________.\n");
 
-    printf("\e[1m\033[0;36mcódigo");
+    printf("\e[1m\033[0;36mcodigo");
     printf("\t");
     printf("\t");
     printf("Nome Social");
@@ -103,12 +103,9 @@ void clientsRecordsMenu(CLIENT *clientList, int clientQuantity) {
     for(int i = 0; i < clientQuantity; i++) {
         printf("%d", (clientList+i)->code);
         printf("\t");
-        printf("\t");
         printf("%s", (clientList+i)->socialName);
         printf("\t");
-        printf("\t");
         printf("%d", (clientList+i)->cellphone);
-        printf("\t");
         printf("\t");
         printf("%s", (clientList+i)->neighborhood);
         printf("\t");

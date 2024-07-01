@@ -25,16 +25,26 @@ static void readFile(FILE *filePointer) {
     PRODUCT *aux = malloc(1 * sizeof(PRODUCT));
 
     filePointer = fopen("productDatabase.bin", "rb");
+
     int i = 1;
     int quantityRead = 0;
+    int auxQuantity = 0;
+
     while(! feof(filePointer)) {
 
         quantityRead = fread(aux, sizeof(PRODUCT), i, filePointer);
+        if(quantityRead == 0) {
+            quantityRead = auxQuantity;
+            break;
+        }
+        auxQuantity = quantityRead;
+
         i++;
         PRODUCT *temp = realloc(aux, (i) * sizeof(PRODUCT));
         aux = temp;
     }
-    quantityProducts = quantityRead;
+    quantityProducts = (quantityRead);
+
     defineMemoryForProducts();
     if(quantityRead > 0) {
         products = aux;
@@ -85,14 +95,10 @@ static int addProduct(PRODUCT * newProduct) {
     return 0;
 }
 
-//funcao para deixa o input stream limpo
-void clear() {
-    while ( getchar() != '\n' );
-}
 // pergunta e gfuarda a informacao de um novo produto
 static int askNewProduct() {
     PRODUCT newProduct;
-    clear();
+    clearInputStream();
 
     printf("descricao: ");
     fgets(newProduct.description, 100, stdin);
@@ -101,18 +107,18 @@ static int askNewProduct() {
     printf("Preco: ");
     scanf("%f", &newProduct.price);
     printf("\n");
-    clear();
+    clearInputStream();
 
     while(newProduct.category != 'L' && newProduct.category != 'P' && newProduct.category != 'A' ) {
         printf("Categoria (L - limpeza, P - Padaria, A - alimentos): ");
         scanf("%c", &newProduct.category);
-        clear();
+        clearInputStream();
     }
     printf("\n");
 
     printf("Margem de lucro: ");
     scanf("%f", &newProduct.profitMargin);
-    clear();
+    clearInputStream();
     printf("\n");
 
     printf("Estoque atual: ");
@@ -132,7 +138,7 @@ static int askNewProduct() {
     else {
         newProduct.code = 1 + (products+(quantityProducts-1))->code;
     }
-    
+
 
     return addProduct(&newProduct);
 }
@@ -145,7 +151,8 @@ static void eliminateChosenProduct() {
     if(file == 0) {
         printf("Arquivo nao encontrado; impossivel cria-lo (Produtos)");
     }
-    
+    fclose(file);
+
     printf("Escreva o codigo do produto a ser eliminado: ");
     scanf("%d", &codeOfProduct);
 
@@ -165,6 +172,11 @@ static void eliminateChosenProduct() {
             printf("Produto eliminado corretamente!\n");
             break;
         }
+    }
+
+    file = fopen("productDatabase.bin", "ab");
+    for(int j = 0; j < quantityProducts; j++) {
+        fwrite((products+j), sizeof(PRODUCT), 1, file);
     }
     fclose(file);
     if (!found) {

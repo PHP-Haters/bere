@@ -67,6 +67,7 @@ void redirectUser(){
 
     switch (choice){
     case 1:
+        validateAdmin();
         mainRegister();
         break;
     case 2:
@@ -81,6 +82,7 @@ void redirectUser(){
         validateAdmin();
         break;
     case 5:
+        validateAdmin();
         mainRecords();
         break;
     case 6:
@@ -98,7 +100,7 @@ void redirectUser(){
 void validateAdmin(){
     if(loggedUser.type != 1){
         cleanChat();
-        printf("Usuario logado atualmente nao eh administrador!");
+        printf("Para efetuar essa acao voce deve ter privilegios de administrador!");
         sleep(2);
         initializeShop();
     }
