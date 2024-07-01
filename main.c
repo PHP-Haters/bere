@@ -16,6 +16,7 @@ void clearInputStream() {
 void main(){
     setlocale(LC_ALL,"");
     createOrFindFile();
+    createOrFindFileClient();
     defineMemoryForClients();
     defineMemoryForUsers();
     mainLogin();

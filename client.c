@@ -49,11 +49,51 @@ static void defineMemoryForClients() {
     (clients+2)->cellphone = 8330752;
 }
 
+static void readFileClient(FILE *filePointer) {
+
+    CLIENT *aux = malloc(1 * sizeof(CLIENT));
+
+    filePointer = fopen("clientDatabase.bin", "rb");
+    int i = 1;
+    int quantityRead = 0;
+    while(! feof(filePointer)) {
+
+        quantityRead = fread(aux, sizeof(CLIENT), i, filePointer);
+        i++;
+        CLIENT *temp = realloc(aux, (i) * sizeof(CLIENT));
+        aux = temp;
+    }
+    quantityClients = quantityRead;
+    defineMemoryForClients();
+    if(quantityRead > 0) {
+        clients = aux;
+    }
+
+}
+static void createOrFindFileClient() {
+
+    FILE *filePointer = fopen("clientDatabase.bin", "ab");
+
+    if(filePointer == 0) {
+        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+    }
+    fclose(filePointer);
+
+    readFileClient(filePointer);
+}
+
 // adiciona o novo produto dentro da lista de produtos
 static int addClient(CLIENT * newClient) {
     quantityClients++;
 
     CLIENT *temp = realloc(clients, quantityClients * sizeof(CLIENT));
+    FILE *file;
+
+    file = fopen("clientDatabase.bin", "ab");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
 
     if (temp == 0) {
        printf("Falha na realocção de memória.\n");
@@ -69,6 +109,9 @@ static int addClient(CLIENT * newClient) {
     strcpy((clients+(quantityClients-1))->neighborhood, newClient->neighborhood);
     (clients+(quantityClients-1))->cpf = newClient->cpf;
     (clients+(quantityClients-1))->cellphone = newClient->cellphone;
+
+    fwrite(newClient, sizeof(CLIENT), 1, file);
+    fclose(file);
 
     return 0;
 }

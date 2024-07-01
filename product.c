@@ -81,10 +81,6 @@ static int addProduct(PRODUCT * newProduct) {
     (products+(quantityProducts-1))->minimumStock = newProduct->minimumStock;
 
     fwrite(newProduct, sizeof(PRODUCT), 1, file);
-    for(int j = 1; j < quantityProducts; j++) {
-        printf("%d %s %0.2f \n", (products+j)->code, (products+j)->description, (products+j)->price);
-            printf("%d", quantityProducts);
-    }
     fclose(file);
     return 0;
 }
