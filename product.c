@@ -17,7 +17,7 @@ static void defineMemoryForProducts() {
     //definicao de memoria da lista de produtos
     products = malloc(quantityProducts * sizeof(PRODUCT));
     if (products == NULL) {
-       printf("Falha na aloca��o de mem�ria inicial.\n");
+       printf("Falha na alocacao de memoria inicial.\n");
     }
 }
 static void readFile(FILE *filePointer) {
@@ -25,16 +25,26 @@ static void readFile(FILE *filePointer) {
     PRODUCT *aux = malloc(1 * sizeof(PRODUCT));
 
     filePointer = fopen("productDatabase.bin", "rb");
+
     int i = 1;
     int quantityRead = 0;
+    int auxQuantity = 0;
+
     while(! feof(filePointer)) {
 
         quantityRead = fread(aux, sizeof(PRODUCT), i, filePointer);
+        if(quantityRead == 0) {
+            quantityRead = auxQuantity;
+            break;
+        }
+        auxQuantity = quantityRead;
+
         i++;
         PRODUCT *temp = realloc(aux, (i) * sizeof(PRODUCT));
         aux = temp;
     }
-    quantityProducts = quantityRead;
+    quantityProducts = (quantityRead);
+
     defineMemoryForProducts();
     if(quantityRead > 0) {
         products = aux;
@@ -57,8 +67,14 @@ static void createOrFindFile() {
 static int addProduct(PRODUCT *newProduct) {
     PRODUCT *temp = realloc(products, (quantityProducts + 1) * sizeof(PRODUCT));
     if (temp == NULL) {
+<<<<<<< HEAD
         printf("Falha na realocação de memória.\n");
         return 1; // Indica falha
+=======
+        printf("Falha na realocacao de memoria.\n");
+        free(temp);
+        return 1;
+>>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
     }
     products = temp;
     products[quantityProducts] = *newProduct; // Copia novo produto para o array
@@ -75,42 +91,45 @@ static int addProduct(PRODUCT *newProduct) {
     return 0; // Sucesso
 }
 
+<<<<<<< HEAD
 
 //funcao para deixa o input stream limpo
 void clear() {
     while ( getchar() != '\n' );
 }
+=======
+>>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
 // pergunta e gfuarda a informacao de um novo produto
 static int askNewProduct() {
     PRODUCT newProduct;
-    clear();
+    clearInputStream();
 
-    printf("descri��o: ");
+    printf("descricao: ");
     fgets(newProduct.description, 100, stdin);
     printf("\n");
 
-    printf("Pre�o: ");
+    printf("Preco: ");
     scanf("%f", &newProduct.price);
     printf("\n");
-    clear();
+    clearInputStream();
 
     while(newProduct.category != 'L' && newProduct.category != 'P' && newProduct.category != 'A' ) {
         printf("Categoria (L - limpeza, P - Padaria, A - alimentos): ");
         scanf("%c", &newProduct.category);
-        clear();
+        clearInputStream();
     }
     printf("\n");
 
     printf("Margem de lucro: ");
     scanf("%f", &newProduct.profitMargin);
-    clear();
+    clearInputStream();
     printf("\n");
 
     printf("Estoque atual: ");
     scanf("%d", &newProduct.stock);
     printf("\n");
 
-    printf("Estoque m�nimo: ");
+    printf("Estoque minimo: ");
     scanf("%d", &newProduct.minimumStock);
     printf("\n");
 
@@ -123,7 +142,7 @@ static int askNewProduct() {
     else {
         newProduct.code = 1 + quantityProducts;
     }
-    
+
 
     return addProduct(&newProduct);
 }

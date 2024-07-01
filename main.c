@@ -52,11 +52,11 @@ void mainMenu(){
     printf("| 2 > Vendas                           |\n");
     printf("| 3 > Abertura de Caixa                |\n");
     printf("| 4 > Fechamento do Caixa              |\n");
-    printf("| 5 > Relatórios                       |\n");
-    printf("| 6 > Sair                             |\n");
+    printf("| 5 > Relatorios                       |\n");
+    printf("| 6 > Sair (Logoff)                    |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o último número): ");
+    printf("Escreva sua escolha (Apenas o ultimo numero): ");
     redirectUser();
 }
 
@@ -67,6 +67,7 @@ void redirectUser(){
 
     switch (choice){
     case 1:
+        validateAdmin();
         mainRegister();
         break;
     case 2:
@@ -81,10 +82,12 @@ void redirectUser(){
         validateAdmin();
         break;
     case 5:
+        validateAdmin();
         mainRecords();
         break;
     case 6:
-        //adicionar sair
+        mainLogin();
+        initializeShop();
         break;
     default:
         initializeShop();
@@ -97,7 +100,7 @@ void redirectUser(){
 void validateAdmin(){
     if(loggedUser.type != 1){
         cleanChat();
-        printf("Usuario logado atualmente não eh administrador!");
+        printf("Para efetuar essa acao voce deve ter privilegios de administrador!");
         sleep(2);
         initializeShop();
     }
@@ -119,7 +122,7 @@ void cashierMenu(){
     printf("| 3.2 Retornar ao Menu Principal    |\n");
     printf("|___________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o último número): ");
+    printf("Escreva sua escolha (Apenas o ultimo numero): ");
 
     redirectCashier();
 }
@@ -137,7 +140,7 @@ void redirectCashier(){
         initializeShop();
         break;
     default:
-        printf("Digite uma opção válida!");
+        printf("Digite uma opçao valida!");
         sleep(2);
         mainCashier();
         break;

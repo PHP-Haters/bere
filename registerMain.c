@@ -15,7 +15,7 @@ void registerMenu(){
     printf("| 1.4 > Retornar ao Menu Principal |\n");
     printf("|__________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o ultimo numero): ");
 
     redirectRegister();
 }
@@ -49,7 +49,7 @@ void clientRegister() {
     clientRegisterMenu();
 }
 void clientRegisterMenu(){
-    //cleanChat();
+    cleanChat();
 
     printf("._______- CADASTRO DE CLIENTES -_______.\n");
     printf("|                                      |\n");
@@ -58,7 +58,7 @@ void clientRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o ultimo numero): ");
 
     redirectClientRegister();
 }
@@ -124,7 +124,7 @@ void productRegisterMenu(){
     printf("| 1.2.3 > Retornar ao Menu Cadastros   |\n");
     printf("|______________________________________|");
     printf("\n");
-    printf("Escreva sua escolha (Apenas o �ltimo n�mero): ");
+    printf("Escreva sua escolha (Apenas o ultimo numero): ");
 
     redirectProductRegister();
 }
@@ -157,7 +157,7 @@ void addNewProduct() {
     returnedValue = askNewProduct();
 
     if(returnedValue == 1) {
-        printf("Aconteceu algum erro na hora de inserir o novo produto.");
+        printf("Erro ao inserir novo produto.");
         system("pause");
         mainRegister();
     }

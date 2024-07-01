@@ -28,13 +28,22 @@ static void readFileClient(FILE *filePointer) {
     filePointer = fopen("clientDatabase.bin", "rb");
     int i = 1;
     int quantityRead = 0;
+    int auxQuantity = 0;
+
     while(! feof(filePointer)) {
 
         quantityRead = fread(aux, sizeof(CLIENT), i, filePointer);
+
+        if(quantityRead == 0) {
+            quantityRead = auxQuantity;
+            break;
+        }
+        auxQuantity = quantityRead;
         i++;
         CLIENT *temp = realloc(aux, (i) * sizeof(CLIENT));
         aux = temp;
     }
+
     quantityClients = quantityRead;
     defineMemoryForClients();
     if(quantityRead > 0) {
@@ -47,7 +56,7 @@ static void createOrFindFileClient() {
     FILE *filePointer = fopen("clientDatabase.bin", "ab");
 
     if(filePointer == 0) {
-        printf("Arquivo não encontrado; impossivel criar ele (Produtos)");
+        printf("Arquivo nao encontrado; impossivel cria-lo (Produtos)");
     }
     fclose(filePointer);
 
@@ -68,7 +77,7 @@ static int addClient(CLIENT * newClient) {
     }
 
     if (temp == 0) {
-       printf("Falha na realocção de memória.\n");
+       printf("Falha na realocção de memoria.\n");
        free(temp);
        return 1;
     }
@@ -120,7 +129,14 @@ static int askNewClient() {
     fgets(newClient.neighborhood, 100, stdin);
     printf("\n");
 
-    newClient.code = 1 + (clients+(quantityClients-1))->code;
+    if(quantityClients == 0) {
+        newClient.code = 1;
+    }
+    else {
+        newClient.code = 1 + (clients+(quantityClients-1))->code;
+    }
+
+
 
     return addClient(&newClient);
 }
@@ -129,7 +145,7 @@ static int askNewClient() {
 int eliminateChosenClient() {
     int foundIndex = -1;
     int codeOfClient = 0;
-    printf("Escreva o c�digo do produto a ser eliminado: ");
+    printf("Escreva o codigo do produto a ser eliminado: ");
     scanf("%d", &codeOfClient);
     for (int i = 0; i < quantityClients; i++) {
         if (clients[i].code == codeOfClient) {
@@ -137,10 +153,15 @@ int eliminateChosenClient() {
             break;
         }
     }
+<<<<<<< HEAD
 
     if (foundIndex == -1) {
         printf("Cliente com código %d não encontrado.\n", codeOfClient);
         return 1; // Cliente não encontrado
+=======
+    if (!found) {
+        printf("Produto nao encontrado!\n");
+>>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
     }
 
     // Deslocar todos os clientes após o índice encontrado uma posição para trás
