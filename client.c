@@ -142,7 +142,7 @@ static int askNewClient() {
 }
 
 // elimina o produto escolhido
-int eliminateChosenClient() {
+static int eliminateChosenClient() {
     int foundIndex = -1;
     int codeOfClient = 0;
     printf("Escreva o codigo do produto a ser eliminado: ");
@@ -153,15 +153,10 @@ int eliminateChosenClient() {
             break;
         }
     }
-<<<<<<< HEAD
 
     if (foundIndex == -1) {
         printf("Cliente com código %d não encontrado.\n", codeOfClient);
         return 1; // Cliente não encontrado
-=======
-    if (!found) {
-        printf("Produto nao encontrado!\n");
->>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
     }
 
     // Deslocar todos os clientes após o índice encontrado uma posição para trás

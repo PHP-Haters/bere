@@ -67,14 +67,8 @@ static void createOrFindFile() {
 static int addProduct(PRODUCT *newProduct) {
     PRODUCT *temp = realloc(products, (quantityProducts + 1) * sizeof(PRODUCT));
     if (temp == NULL) {
-<<<<<<< HEAD
         printf("Falha na realocação de memória.\n");
         return 1; // Indica falha
-=======
-        printf("Falha na realocacao de memoria.\n");
-        free(temp);
-        return 1;
->>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
     }
     products = temp;
     products[quantityProducts] = *newProduct; // Copia novo produto para o array
@@ -91,14 +85,11 @@ static int addProduct(PRODUCT *newProduct) {
     return 0; // Sucesso
 }
 
-<<<<<<< HEAD
 
 //funcao para deixa o input stream limpo
 void clear() {
     while ( getchar() != '\n' );
 }
-=======
->>>>>>> 13618d94a4d5be30fffb6dbb996c0b4d74899df0
 // pergunta e gfuarda a informacao de um novo produto
 static int askNewProduct() {
     PRODUCT newProduct;
